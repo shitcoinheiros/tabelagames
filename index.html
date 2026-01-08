@@ -3,144 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabela FIPE de Video Games</title>
+    <title>Consulta de Games - Tabela FIPE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
         }
 
         :root {
-            --primary-color: #6a11cb;
-            --secondary-color: #2575fc;
-            --accent-color: #ff3e80;
-            --light-color: #f8f9fa;
-            --dark-color: #212529;
-            --gray-color: #6c757d;
-            --success-color: #28a745;
-            --warning-color: #ffc107;
+            --fipe-blue: #003366;
+            --fipe-light-blue: #0054a6;
+            --fipe-gray: #f2f2f2;
+            --fipe-border: #cccccc;
+            --fipe-text: #333333;
         }
 
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: var(--dark-color);
-            min-height: 100vh;
-            padding-bottom: 40px;
+            background-color: #ffffff;
+            color: var(--fipe-text);
+            line-height: 1.6;
+        }
+
+        /* Topo Padrão FIPE */
+        header {
+            background-color: var(--fipe-blue);
+            color: white;
+            padding: 20px 0;
+            border-bottom: 5px solid #ffcc00; /* Detalhe amarelo comum em órgãos oficiais */
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        header {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 30px 0;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            margin-bottom: 40px;
-        }
-
         h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            font-weight: bold;
         }
 
         .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
+            font-size: 0.9rem;
+            color: #bdc3c7;
         }
 
-        .controls {
-            background-color: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-            margin-bottom: 30px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: center;
+        /* Interface de Seleção (Botoões Estilo FIPE) */
+        .selection-area {
+            background-color: var(--fipe-gray);
+            padding: 30px;
+            margin-top: 20px;
+            border-radius: 4px;
+            border: 1px solid var(--fipe-border);
+        }
+
+        .step-label {
+            display: block;
+            font-weight: bold;
+            color: var(--fipe-blue);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
         }
 
         .filter-group {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .filter-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--dark-color);
+            margin-bottom: 20px;
         }
 
         select, input {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        select:focus, input:focus {
-            border-color: var(--primary-color);
-            outline: none;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .stat-card {
+            padding: 12px;
+            border: 1px solid var(--fipe-border);
+            border-radius: 4px;
             background-color: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Botões de Categoria (Ícones) */
+        .category-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .cat-btn {
             flex: 1;
-            min-width: 180px;
+            padding: 15px;
+            background: white;
+            border: 2px solid var(--fipe-border);
+            border-radius: 8px;
             text-align: center;
-            transition: transform 0.3s;
+            cursor: pointer;
+            transition: 0.2s;
+            color: var(--fipe-blue);
+            font-weight: bold;
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
+        .cat-btn:hover, .cat-btn.active {
+            border-color: var(--fipe-light-blue);
+            background-color: var(--fipe-light-blue);
+            color: white;
         }
 
-        .stat-card h3 {
-            font-size: 2rem;
-            color: var(--primary-color);
+        .cat-btn i {
+            display: block;
+            font-size: 1.5rem;
             margin-bottom: 5px;
         }
 
-        .stat-card p {
-            color: var(--gray-color);
-            font-weight: 500;
-        }
-
+        /* Tabela de Resultados */
         .table-container {
-            background-color: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            margin-bottom: 40px;
-            overflow-x: auto;
+            margin-top: 30px;
+            border: 1px solid var(--fipe-border);
         }
 
         table {
@@ -149,499 +128,161 @@
         }
 
         thead {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            background-color: var(--fipe-blue);
             color: white;
         }
 
         th {
-            padding: 20px 15px;
+            padding: 12px;
             text-align: left;
-            font-weight: 600;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        th:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        th i {
-            margin-left: 8px;
             font-size: 0.9rem;
+            text-transform: uppercase;
         }
 
-        tbody tr {
-            border-bottom: 1px solid #f0f0f0;
-            transition: background-color 0.2s;
-        }
-
-        tbody tr:hover {
-            background-color: #f8f9ff;
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
 
         td {
-            padding: 18px 15px;
-            color: var(--dark-color);
+            padding: 12px;
+            border-bottom: 1px solid var(--fipe-border);
+            font-size: 0.95rem;
         }
 
-        .console-icon {
-            font-size: 1.5rem;
-            margin-right: 10px;
-            vertical-align: middle;
+        .price-tag {
+            color: var(--fipe-light-blue);
+            font-weight: bold;
         }
 
-        .playstation {
-            color: #0066cc;
-        }
-
-        .xbox {
-            color: #107c10;
-        }
-
-        .nintendo {
-            color: #e60012;
-        }
-
-        .pc {
-            color: #ff9900;
-        }
-
-        .price {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .price-up {
-            color: var(--success-color);
-        }
-
-        .price-down {
-            color: #dc3545;
-        }
-
-        .price-stable {
-            color: var(--gray-color);
-        }
-
-        .change-indicator {
-            display: inline-block;
-            margin-left: 8px;
-            font-size: 0.9rem;
-        }
-
-        .status {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .available {
-            background-color: rgba(40, 167, 69, 0.15);
-            color: var(--success-color);
-        }
-
-        .limited {
-            background-color: rgba(255, 193, 7, 0.15);
-            color: #b48c00;
-        }
-
-        .unavailable {
-            background-color: rgba(220, 53, 69, 0.15);
-            color: #dc3545;
-        }
-
+        /* Footer */
         footer {
+            margin-top: 50px;
+            padding: 30px 0;
+            border-top: 1px solid var(--fipe-border);
             text-align: center;
-            color: var(--gray-color);
-            padding-top: 30px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            color: #777;
         }
 
-        .highlight {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        .last-update {
-            background-color: white;
-            border-radius: 10px;
-            padding: 15px;
+        .fipe-stamp {
             display: inline-block;
-            margin-top: 15px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-
-            .controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .filter-group {
-                min-width: 100%;
-            }
-
-            th, td {
-                padding: 12px 10px;
-                font-size: 0.9rem;
-            }
-
-            .stat-card {
-                min-width: 100%;
-            }
+            padding: 5px 15px;
+            background-color: var(--fipe-blue);
+            color: white;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1><i class="fas fa-gamepad"></i> Tabela FIPE de Video Games</h1>
-            <p class="subtitle">Consulte os valores de mercado dos principais consoles e jogos. Atualizada mensalmente com base em preços de mercado.</p>
-        </div>
-    </header>
 
+<header>
     <div class="container">
-        <div class="controls">
-            <div class="filter-group">
-                <label for="platform-filter"><i class="fas fa-filter"></i> Filtrar por Plataforma</label>
-                <select id="platform-filter">
-                    <option value="all">Todas as plataformas</option>
-                    <option value="playstation">PlayStation</option>
-                    <option value="xbox">Xbox</option>
-                    <option value="nintendo">Nintendo</option>
-                    <option value="pc">PC</option>
-                </select>
+        <h1>Tabela Games</h1>
+        <p class="subtitle">Fundação de Pesquisas Gamers - Consulte o valor médio de consoles e jogos</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="selection-area">
+        <div class="category-buttons">
+            <div class="cat-btn active" onclick="selectType('console')">
+                <i class="fas fa-gamepad"></i> Consoles
             </div>
-            
-            <div class="filter-group">
-                <label for="category-filter"><i class="fas fa-list"></i> Filtrar por Categoria</label>
-                <select id="category-filter">
-                    <option value="all">Todas as categorias</option>
-                    <option value="console">Consoles</option>
-                    <option value="game">Jogos</option>
-                    <option value="accessory">Acessórios</option>
-                </select>
+            <div class="cat-btn" onclick="selectType('game')">
+                <i class="fas fa-compact-disc"></i> Jogos
             </div>
-            
-            <div class="filter-group">
-                <label for="search"><i class="fas fa-search"></i> Buscar por Nome</label>
-                <input type="text" id="search" placeholder="Digite o nome do produto...">
+            <div class="cat-btn" onclick="selectType('accessory')">
+                <i class="fas fa-headset"></i> Acessórios
             </div>
         </div>
 
-        <div class="stats">
-            <div class="stat-card">
-                <h3 id="total-items">42</h3>
-                <p>Itens na Tabela</p>
-            </div>
-            <div class="stat-card">
-                <h3 id="avg-price">R$ 2.450</h3>
-                <p>Preço Médio</p>
-            </div>
-            <div class="stat-card">
-                <h3 id="last-update-date">06/2024</h3>
-                <p>Mês de Referência</p>
-            </div>
-            <div class="stat-card">
-                <h3 id="price-change">+1.8%</h3>
-                <p>Variação no Mês</p>
-            </div>
+        <div class="filter-group">
+            <label class="step-label">1: Selecione a Marca (Plataforma)</label>
+            <select id="platform-filter" onchange="applyFilters()">
+                <option value="all">Todas as Marcas</option>
+                <option value="playstation">Sony PlayStation</option>
+                <option value="xbox">Microsoft Xbox</option>
+                <option value="nintendo">Nintendo</option>
+                <option value="pc">PC / Master Race</option>
+            </select>
         </div>
 
-        <div class="table-container">
-            <table id="fipe-table">
-                <thead>
-                    <tr>
-                        <th data-sort="name">Produto <i class="fas fa-sort"></i></th>
-                        <th data-sort="platform">Plataforma <i class="fas fa-sort"></i></th>
-                        <th data-sort="category">Categoria <i class="fas fa-sort"></i></th>
-                        <th data-sort="price">Preço Médio <i class="fas fa-sort"></i></th>
-                        <th data-sort="change">Variação <i class="fas fa-sort"></i></th>
-                        <th data-sort="status">Disponibilidade <i class="fas fa-sort"></i></th>
-                    </tr>
-                </thead>
-                <tbody id="table-body">
-                    <!-- Os dados serão inseridos via JavaScript -->
-                </tbody>
-            </table>
+        <div class="filter-group">
+            <label class="step-label">2: Digite o Modelo ou Nome</label>
+            <input type="text" id="search" placeholder="Ex: PlayStation 5, Zelda, etc..." oninput="applyFilters()">
         </div>
-
-        <footer>
-            <p>Esta tabela é uma simulação da <span class="highlight">Tabela FIPE</span> para video games, criada para fins ilustrativos.</p>
-            <p>Os valores apresentados são estimativas baseadas em preços de mercado e podem variar conforme a região e o vendedor.</p>
-            
-            <div class="last-update">
-                <p><i class="fas fa-sync-alt"></i> Última atualização: <span class="highlight">Junho de 2024</span></p>
-                <p><i class="fas fa-info-circle"></i> Próxima atualização: Julho de 2024</p>
-            </div>
-        </footer>
     </div>
 
-    <script>
-        // Dados da tabela FIPE de video games
-        const gameData = [
-            { id: 1, name: "PlayStation 5", platform: "playstation", category: "console", price: 3899, change: -1.2, status: "available", icon: "fab fa-playstation" },
-            { id: 2, name: "Xbox Series X", platform: "xbox", category: "console", price: 3599, change: 0.5, status: "available", icon: "fab fa-xbox" },
-            { id: 3, name: "Nintendo Switch OLED", platform: "nintendo", category: "console", price: 2299, change: 2.1, status: "available", icon: "fas fa-gamepad" },
-            { id: 4, name: "God of War Ragnarök", platform: "playstation", category: "game", price: 299, change: -0.8, status: "available", icon: "fab fa-playstation" },
-            { id: 5, name: "Halo Infinite", platform: "xbox", category: "game", price: 249, change: 1.5, status: "available", icon: "fab fa-xbox" },
-            { id: 6, name: "The Legend of Zelda: Tears of the Kingdom", platform: "nintendo", category: "game", price: 349, change: 3.2, status: "limited", icon: "fas fa-gamepad" },
-            { id: 7, name: "PC Gamer (RTX 4060)", platform: "pc", category: "console", price: 6899, change: -0.5, status: "available", icon: "fas fa-desktop" },
-            { id: 8, name: "Controle DualSense PS5", platform: "playstation", category: "accessory", price: 399, change: 1.0, status: "available", icon: "fab fa-playstation" },
-            { id: 9, name: "Xbox Wireless Controller", platform: "xbox", category: "accessory", price: 349, change: -0.3, status: "available", icon: "fab fa-xbox" },
-            { id: 10, name: "Nintendo Pro Controller", platform: "nintendo", category: "accessory", price: 379, change: 1.8, status: "available", icon: "fas fa-gamepad" },
-            { id: 11, name: "PlayStation 4 Slim", platform: "playstation", category: "console", price: 2199, change: -2.1, status: "available", icon: "fab fa-playstation" },
-            { id: 12, name: "Xbox Series S", platform: "xbox", category: "console", price: 2299, change: 1.2, status: "limited", icon: "fab fa-xbox" },
-            { id: 13, name: "Nintendo Switch Lite", platform: "nintendo", category: "console", price: 1399, change: 0.9, status: "available", icon: "fas fa-gamepad" },
-            { id: 14, name: "Spider-Man 2", platform: "playstation", category: "game", price: 349, change: 0.0, status: "available", icon: "fab fa-playstation" },
-            { id: 15, name: "Forza Horizon 5", platform: "xbox", category: "game", price: 279, change: -1.1, status: "available", icon: "fab fa-xbox" },
-            { id: 16, name: "Super Mario Odyssey", platform: "nintendo", category: "game", price: 299, change: 0.5, status: "available", icon: "fas fa-gamepad" },
-            { id: 17, name: "Placa de Vídeo RTX 4070", platform: "pc", category: "accessory", price: 3899, change: -3.2, status: "available", icon: "fas fa-desktop" },
-            { id: 18, name: "Headset PS5 Pulse 3D", platform: "playstation", category: "accessory", price: 599, change: 1.5, status: "limited", icon: "fab fa-playstation" },
-            { id: 19, name: "Headset Xbox Wireless", platform: "xbox", category: "accessory", price: 699, change: 2.1, status: "available", icon: "fab fa-xbox" },
-            { id: 20, name: "Animal Crossing: New Horizons", platform: "nintendo", category: "game", price: 279, change: -0.8, status: "available", icon: "fas fa-gamepad" },
-            { id: 21, name: "PlayStation VR2", platform: "playstation", category: "accessory", price: 3599, change: -1.8, status: "unavailable", icon: "fab fa-playstation" },
-            { id: 22, name: "Xbox Game Pass Ultimate (12 meses)", platform: "xbox", category: "game", price: 499, change: 0.0, status: "available", icon: "fab fa-xbox" },
-            { id: 23, name: "Nintendo Switch Online (12 meses)", platform: "nintendo", category: "game", price: 139, change: 0.0, status: "available", icon: "fas fa-gamepad" },
-            { id: 24, name: "Processador Intel i7 13700K", platform: "pc", category: "accessory", price: 2499, change: -2.5, status: "available", icon: "fas fa-desktop" },
-            { id: 25, name: "PlayStation Plus Extra (12 meses)", platform: "playstation", category: "game", price: 399, change: 5.0, status: "available", icon: "fab fa-playstation" }
-        ];
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Mês de Referência</th>
+                    <th>Preço Médio</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                </tbody>
+        </table>
+    </div>
 
-        // Elementos DOM
-        const tableBody = document.getElementById('table-body');
-        const platformFilter = document.getElementById('platform-filter');
-        const categoryFilter = document.getElementById('category-filter');
-        const searchInput = document.getElementById('search');
-        const totalItemsElement = document.getElementById('total-items');
-        const avgPriceElement = document.getElementById('avg-price');
-        const lastUpdateDateElement = document.getElementById('last-update-date');
-        const priceChangeElement = document.getElementById('price-change');
+    <footer>
+        <div class="fipe-stamp">TABELA GAMES</div>
+        <p>© 2024 Tabela Games - Pesquisa de Preços de Mercado</p>
+        <p>Os dados são meramente ilustrativos para o seu projeto.</p>
+    </footer>
+</div>
 
-        // Variáveis de estado
-        let currentData = [...gameData];
-        let sortColumn = 'price';
-        let sortDirection = 'desc';
+<script>
+    const gameData = [
+        { name: "PlayStation 5 Digital", platform: "playstation", category: "console", price: 3899, date: "junho de 2024" },
+        { name: "Xbox Series X", platform: "xbox", category: "console", price: 3599, date: "junho de 2024" },
+        { name: "Nintendo Switch OLED", platform: "nintendo", category: "console", price: 2299, date: "junho de 2024" },
+        { name: "The Legend of Zelda: TotK", platform: "nintendo", category: "game", price: 349, date: "junho de 2024" },
+        { name: "Spider-Man 2", platform: "playstation", category: "game", price: 349, date: "junho de 2024" },
+        { name: "Controle DualSense", platform: "playstation", category: "accessory", price: 399, date: "junho de 2024" }
+    ];
 
-        // Inicialização
-        document.addEventListener('DOMContentLoaded', function() {
-            renderTable();
-            updateStats();
-            setupEventListeners();
+    let activeCategory = 'console';
+
+    function selectType(cat) {
+        activeCategory = cat;
+        // Atualiza visual dos botões
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if(btn.innerText.toLowerCase().includes(cat)) btn.classList.add('active');
+        });
+        applyFilters();
+    }
+
+    function applyFilters() {
+        const platform = document.getElementById('platform-filter').value;
+        const search = document.getElementById('search').value.toLowerCase();
+        const tbody = document.getElementById('table-body');
+        
+        const filtered = gameData.filter(item => {
+            const matchCat = item.category === activeCategory;
+            const matchPlat = platform === 'all' || item.platform === platform;
+            const matchSearch = item.name.toLowerCase().includes(search);
+            return matchCat && matchPlat && matchSearch;
         });
 
-        // Renderizar a tabela
-        function renderTable() {
-            tableBody.innerHTML = '';
-            
-            currentData.forEach(item => {
-                const row = document.createElement('tr');
-                
-                // Determinar a classe de variação de preço
-                let changeClass = 'price-stable';
-                let changeIcon = 'fas fa-minus';
-                if (item.change > 0) {
-                    changeClass = 'price-up';
-                    changeIcon = 'fas fa-arrow-up';
-                } else if (item.change < 0) {
-                    changeClass = 'price-down';
-                    changeIcon = 'fas fa-arrow-down';
-                }
-                
-                // Determinar a classe de status
-                let statusClass = '';
-                let statusText = '';
-                switch(item.status) {
-                    case 'available':
-                        statusClass = 'available';
-                        statusText = 'Disponível';
-                        break;
-                    case 'limited':
-                        statusClass = 'limited';
-                        statusText = 'Estoque Limitado';
-                        break;
-                    case 'unavailable':
-                        statusClass = 'unavailable';
-                        statusText = 'Indisponível';
-                        break;
-                }
-                
-                // Determinar a classe da plataforma para o ícone
-                let platformClass = '';
-                switch(item.platform) {
-                    case 'playstation':
-                        platformClass = 'playstation';
-                        break;
-                    case 'xbox':
-                        platformClass = 'xbox';
-                        break;
-                    case 'nintendo':
-                        platformClass = 'nintendo';
-                        break;
-                    case 'pc':
-                        platformClass = 'pc';
-                        break;
-                }
-                
-                row.innerHTML = `
-                    <td>
-                        <i class="${item.icon} console-icon ${platformClass}"></i>
-                        ${item.name}
-                    </td>
-                    <td>${getPlatformName(item.platform)}</td>
-                    <td>${getCategoryName(item.category)}</td>
-                    <td class="price">R$ ${item.price.toLocaleString('pt-BR')}</td>
-                    <td class="${changeClass}">
-                        ${item.change > 0 ? '+' : ''}${item.change.toFixed(1)}%
-                        <span class="change-indicator"><i class="${changeIcon}"></i></span>
-                    </td>
-                    <td><span class="status ${statusClass}">${statusText}</span></td>
-                `;
-                
-                tableBody.appendChild(row);
-            });
-        }
+        tbody.innerHTML = filtered.map(item => `
+            <tr>
+                <td><strong>${item.name}</strong></td>
+                <td>${item.platform.toUpperCase()}</td>
+                <td>${item.date}</td>
+                <td class="price-tag">R$ ${item.price.toLocaleString('pt-BR')}</td>
+            </tr>
+        `).join('');
+    }
 
-        // Atualizar estatísticas
-        function updateStats() {
-            totalItemsElement.textContent = currentData.length;
-            
-            // Calcular preço médio
-            const avgPrice = currentData.reduce((sum, item) => sum + item.price, 0) / currentData.length;
-            avgPriceElement.textContent = `R$ ${Math.round(avgPrice).toLocaleString('pt-BR')}`;
-            
-            // Calcular variação média
-            const avgChange = currentData.reduce((sum, item) => sum + item.change, 0) / currentData.length;
-            priceChangeElement.textContent = `${avgChange > 0 ? '+' : ''}${avgChange.toFixed(1)}%`;
-            
-            // Definir cor da variação
-            if (avgChange > 0) {
-                priceChangeElement.style.color = 'var(--success-color)';
-            } else if (avgChange < 0) {
-                priceChangeElement.style.color = '#dc3545';
-            } else {
-                priceChangeElement.style.color = 'var(--gray-color)';
-            }
-        }
+    // Iniciar tabela
+    window.onload = applyFilters;
+</script>
 
-        // Configurar listeners de eventos
-        function setupEventListeners() {
-            // Filtros
-            platformFilter.addEventListener('change', applyFilters);
-            categoryFilter.addEventListener('change', applyFilters);
-            searchInput.addEventListener('input', applyFilters);
-            
-            // Ordenação da tabela
-            document.querySelectorAll('th[data-sort]').forEach(th => {
-                th.addEventListener('click', () => {
-                    const column = th.getAttribute('data-sort');
-                    sortTable(column);
-                });
-            });
-        }
-
-        // Aplicar filtros
-        function applyFilters() {
-            const platformValue = platformFilter.value;
-            const categoryValue = categoryFilter.value;
-            const searchValue = searchInput.value.toLowerCase();
-            
-            currentData = gameData.filter(item => {
-                // Filtro por plataforma
-                if (platformValue !== 'all' && item.platform !== platformValue) {
-                    return false;
-                }
-                
-                // Filtro por categoria
-                if (categoryValue !== 'all' && item.category !== categoryValue) {
-                    return false;
-                }
-                
-                // Filtro por busca
-                if (searchValue && !item.name.toLowerCase().includes(searchValue)) {
-                    return false;
-                }
-                
-                return true;
-            });
-            
-            // Reaplicar ordenação atual
-            sortTable(sortColumn, false);
-            renderTable();
-            updateStats();
-        }
-
-        // Ordenar tabela
-        function sortTable(column, resetDirection = true) {
-            // Resetar direção se for uma nova coluna
-            if (column !== sortColumn && resetDirection) {
-                sortDirection = 'asc';
-            } else if (resetDirection) {
-                // Alternar direção se for a mesma coluna
-                sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-            }
-            
-            sortColumn = column;
-            
-            // Atualizar ícones de ordenação
-            document.querySelectorAll('th i').forEach(icon => {
-                icon.className = 'fas fa-sort';
-            });
-            
-            const currentTh = document.querySelector(`th[data-sort="${column}"]`);
-            const icon = currentTh.querySelector('i');
-            icon.className = sortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down';
-            
-            // Ordenar dados
-            currentData.sort((a, b) => {
-                let aValue = a[column];
-                let bValue = b[column];
-                
-                // Para ordenação de texto
-                if (column === 'name' || column === 'platform' || column === 'category' || column === 'status') {
-                    aValue = aValue.toString().toLowerCase();
-                    bValue = bValue.toString().toLowerCase();
-                    
-                    if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
-                    if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
-                    return 0;
-                }
-                
-                // Para ordenação numérica
-                if (sortDirection === 'asc') {
-                    return aValue - bValue;
-                } else {
-                    return bValue - aValue;
-                }
-            });
-            
-            renderTable();
-        }
-
-        // Funções auxiliares
-        function getPlatformName(platform) {
-            const platforms = {
-                'playstation': 'PlayStation',
-                'xbox': 'Xbox',
-                'nintendo': 'Nintendo',
-                'pc': 'PC'
-            };
-            return platforms[platform] || platform;
-        }
-
-        function getCategoryName(category) {
-            const categories = {
-                'console': 'Console',
-                'game': 'Jogo',
-                'accessory': 'Acessório'
-            };
-            return categories[category] || category;
-        }
-    </script>
 </body>
 </html>
