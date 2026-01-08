@@ -3,174 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta de Games - Tabela FIPE</title>
+    <title>Consulta de Games - Tabela FIPE (Clone Estudo)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --fipe-blue: #003366;
+            --fipe-orange: #f39200;
+            --fipe-gray-bg: #f7f7f7;
+            --fipe-border: #dddddd;
+            --fipe-text: #444444;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        :root {
-            --fipe-blue: #003366;
-            --fipe-light-blue: #0054a6;
-            --fipe-gray: #f2f2f2;
-            --fipe-border: #cccccc;
-            --fipe-text: #333333;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: #ffffff;
+            background-color: #fff;
             color: var(--fipe-text);
-            line-height: 1.6;
         }
 
-        /* Topo Padrão FIPE */
+        /* Topo Azul Oficial */
         header {
             background-color: var(--fipe-blue);
-            color: white;
-            padding: 20px 0;
-            border-bottom: 5px solid #ffcc00; /* Detalhe amarelo comum em órgãos oficiais */
+            padding: 15px 0;
+            border-bottom: 4px solid var(--fipe-orange);
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 960px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
-        h1 {
-            font-size: 1.8rem;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            color: #bdc3c7;
-        }
-
-        /* Interface de Seleção (Botoões Estilo FIPE) */
-        .selection-area {
-            background-color: var(--fipe-gray);
-            padding: 30px;
-            margin-top: 20px;
-            border-radius: 4px;
-            border: 1px solid var(--fipe-border);
-        }
-
-        .step-label {
-            display: block;
-            font-weight: bold;
-            color: var(--fipe-blue);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-        }
-
-        .filter-group {
-            margin-bottom: 20px;
-        }
-
-        select, input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--fipe-border);
-            border-radius: 4px;
-            background-color: white;
-            font-size: 1rem;
-            color: #555;
-        }
-
-        /* Botões de Categoria (Ícones) */
-        .category-buttons {
+        .header-content {
             display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .cat-btn {
-            flex: 1;
-            padding: 15px;
-            background: white;
-            border: 2px solid var(--fipe-border);
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.2s;
-            color: var(--fipe-blue);
-            font-weight: bold;
-        }
-
-        .cat-btn:hover, .cat-btn.active {
-            border-color: var(--fipe-light-blue);
-            background-color: var(--fipe-light-blue);
+            align-items: center;
             color: white;
         }
 
-        .cat-btn i {
-            display: block;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
+        .logo-placeholder {
+            font-weight: bold;
+            font-size: 24px;
+            border: 2px solid white;
+            padding: 5px 10px;
+            margin-right: 15px;
         }
 
-        /* Tabela de Resultados */
-        .table-container {
-            margin-top: 30px;
+        /* Seção de Abas (Botões de Categoria) */
+        .search-section {
+            padding: 40px 0;
+            background-color: #fff;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--fipe-border);
+            margin-bottom: 30px;
+        }
+
+        .nav-link {
+            padding: 15px 25px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-bottom: none;
+            margin-right: 5px;
+            background-color: #eee;
+            color: var(--fipe-blue);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .nav-link.active {
+            background-color: #fff;
+            border-color: var(--fipe-border);
+            border-bottom: 2px solid white;
+            margin-bottom: -1px;
+            color: var(--fipe-orange);
+        }
+
+        /* Formulário de Consulta (Estilo Passo a Passo) */
+        .fipe-form {
+            background-color: var(--fipe-gray-bg);
+            padding: 30px;
+            border-radius: 4px;
             border: 1px solid var(--fipe-border);
         }
 
-        table {
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: var(--fipe-blue);
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--fipe-border);
+            border-radius: 4px;
+            background-color: #fff;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .btn-search {
+            background-color: var(--fipe-blue);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+
+        .btn-search:hover {
+            background-color: var(--fipe-orange);
+        }
+
+        /* Tabela de Resultados */
+        .result-card {
+            margin-top: 30px;
+            display: none; /* Escondido até pesquisar */
+        }
+
+        .result-table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        thead {
-            background-color: var(--fipe-blue);
-            color: white;
+        .result-table tr td {
+            padding: 15px;
+            border: 1px solid var(--fipe-border);
         }
 
-        th {
-            padding: 12px;
-            text-align: left;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        td {
-            padding: 12px;
-            border-bottom: 1px solid var(--fipe-border);
-            font-size: 0.95rem;
-        }
-
-        .price-tag {
-            color: var(--fipe-light-blue);
+        .result-table td:first-child {
+            background-color: var(--fipe-gray-bg);
             font-weight: bold;
+            width: 30%;
+            color: var(--fipe-blue);
         }
 
-        /* Footer */
+        .price-row {
+            color: var(--fipe-blue);
+            font-weight: bold;
+            font-size: 20px;
+        }
+
         footer {
-            margin-top: 50px;
-            padding: 30px 0;
-            border-top: 1px solid var(--fipe-border);
+            margin-top: 60px;
+            padding: 20px 0;
+            background: var(--fipe-gray-bg);
             text-align: center;
-            font-size: 0.8rem;
-            color: #777;
-        }
-
-        .fipe-stamp {
-            display: inline-block;
-            padding: 5px 15px;
-            background-color: var(--fipe-blue);
-            color: white;
-            font-weight: bold;
-            margin-bottom: 10px;
+            font-size: 12px;
+            color: #888;
         }
     </style>
 </head>
@@ -178,110 +177,131 @@
 
 <header>
     <div class="container">
-        <h1>Tabela Games</h1>
-        <p class="subtitle">Fundação de Pesquisas Gamers - Consulte o valor médio de consoles e jogos</p>
+        <div class="header-content">
+            <div class="logo-placeholder">TG</div>
+            <div>
+                <h1 style="font-size: 20px;">TABELA GAMES</h1>
+                <p style="font-size: 12px; opacity: 0.8;">Fundação de Pesquisas de Entretenimento</p>
+            </div>
+        </div>
     </div>
 </header>
 
-<div class="container">
-    <div class="selection-area">
-        <div class="category-buttons">
-            <div class="cat-btn active" onclick="selectType('console')">
-                <i class="fas fa-gamepad"></i> Consoles
-            </div>
-            <div class="cat-btn" onclick="selectType('game')">
-                <i class="fas fa-compact-disc"></i> Jogos
-            </div>
-            <div class="cat-btn" onclick="selectType('accessory')">
-                <i class="fas fa-headset"></i> Acessórios
-            </div>
+<div class="container search-section">
+    <div class="nav-tabs">
+        <div class="nav-link active" onclick="changeTab(this, 'console')">
+            <i class="fas fa-gamepad"></i> CONSOLES
         </div>
+        <div class="nav-link" onclick="changeTab(this, 'game')">
+            <i class="fas fa-compact-disc"></i> JOGOS
+        </div>
+        <div class="nav-link" onclick="changeTab(this, 'accessory')">
+            <i class="fas fa-headset"></i> ACESSÓRIOS
+        </div>
+    </div>
 
-        <div class="filter-group">
-            <label class="step-label">1: Selecione a Marca (Plataforma)</label>
-            <select id="platform-filter" onchange="applyFilters()">
-                <option value="all">Todas as Marcas</option>
-                <option value="playstation">Sony PlayStation</option>
-                <option value="xbox">Microsoft Xbox</option>
+    <div class="fipe-form">
+        <div class="form-group">
+            <label>1: Digite ou selecione a marca do console/jogo</label>
+            <select id="select-brand">
+                <option value="">Selecione a marca</option>
+                <option value="sony">Sony (PlayStation)</option>
+                <option value="microsoft">Microsoft (Xbox)</option>
                 <option value="nintendo">Nintendo</option>
-                <option value="pc">PC / Master Race</option>
+                <option value="sega">Sega (Retro)</option>
             </select>
         </div>
 
-        <div class="filter-group">
-            <label class="step-label">2: Digite o Modelo ou Nome</label>
-            <input type="text" id="search" placeholder="Ex: PlayStation 5, Zelda, etc..." oninput="applyFilters()">
+        <div class="form-group">
+            <label>2: Selecione o modelo</label>
+            <select id="select-model">
+                <option value="">Selecione o modelo</option>
+            </select>
         </div>
+
+        <div class="form-group">
+            <label>3: Selecione o ano ou edição</label>
+            <select id="select-year">
+                <option value="">Selecione o ano</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="zero">Novo (Lacrado)</option>
+            </select>
+        </div>
+
+        <button class="btn-search" onclick="showResult()">Pesquisar</button>
     </div>
 
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Modelo</th>
-                    <th>Marca</th>
-                    <th>Mês de Referência</th>
-                    <th>Preço Médio</th>
-                </tr>
-            </thead>
-            <tbody id="table-body">
-                </tbody>
+    <div class="result-card" id="result-box">
+        <table class="result-table">
+            <tr>
+                <td>Mês de referência:</td>
+                <td id="res-month">janeiro de 2026</td>
+            </tr>
+            <tr>
+                <td>Marca:</td>
+                <td id="res-brand">Sony</td>
+            </tr>
+            <tr>
+                <td>Modelo:</td>
+                <td id="res-model">PlayStation 5 Slim</td>
+            </tr>
+            <tr>
+                <td>Ano Edição:</td>
+                <td id="res-year">Zero KM</td>
+            </tr>
+            <tr>
+                <td>Preço Médio:</td>
+                <td class="price-row" id="res-price">R$ 3.750,00</td>
+            </tr>
         </table>
+        <p style="font-size: 11px; color: #999; margin-top: 10px;">Data da consulta: quinta-feira, 8 de janeiro de 2026 14:14</p>
     </div>
-
-    <footer>
-        <div class="fipe-stamp">TABELA GAMES</div>
-        <p>© 2024 Tabela Games - Pesquisa de Preços de Mercado</p>
-        <p>Os dados são meramente ilustrativos para o seu projeto.</p>
-    </footer>
 </div>
 
+<footer>
+    <div class="container">
+        <p>© Tabela Games - Clone para fins de estudo. Baseado na interface oficial da FIPE.</p>
+    </div>
+</footer>
+
 <script>
-    const gameData = [
-        { name: "PlayStation 5 Digital", platform: "playstation", category: "console", price: 3899, date: "junho de 2024" },
-        { name: "Xbox Series X", platform: "xbox", category: "console", price: 3599, date: "junho de 2024" },
-        { name: "Nintendo Switch OLED", platform: "nintendo", category: "console", price: 2299, date: "junho de 2024" },
-        { name: "The Legend of Zelda: TotK", platform: "nintendo", category: "game", price: 349, date: "junho de 2024" },
-        { name: "Spider-Man 2", platform: "playstation", category: "game", price: 349, date: "junho de 2024" },
-        { name: "Controle DualSense", platform: "playstation", category: "accessory", price: 399, date: "junho de 2024" }
-    ];
-
-    let activeCategory = 'console';
-
-    function selectType(cat) {
-        activeCategory = cat;
-        // Atualiza visual dos botões
-        document.querySelectorAll('.cat-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if(btn.innerText.toLowerCase().includes(cat)) btn.classList.add('active');
-        });
-        applyFilters();
+    function changeTab(element, type) {
+        // Remove active de todos
+        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+        // Adiciona no clicado
+        element.classList.add('active');
+        // Resetar selects (simulação)
+        document.getElementById('select-model').innerHTML = '<option value="">Selecione o modelo</option>';
     }
 
-    function applyFilters() {
-        const platform = document.getElementById('platform-filter').value;
-        const search = document.getElementById('search').value.toLowerCase();
-        const tbody = document.getElementById('table-body');
+    // Simulação de preenchimento do segundo select ao escolher a marca
+    document.getElementById('select-brand').addEventListener('change', function() {
+        const modelSelect = document.getElementById('select-model');
+        modelSelect.innerHTML = '<option value="">Carregando...</option>';
         
-        const filtered = gameData.filter(item => {
-            const matchCat = item.category === activeCategory;
-            const matchPlat = platform === 'all' || item.platform === platform;
-            const matchSearch = item.name.toLowerCase().includes(search);
-            return matchCat && matchPlat && matchSearch;
-        });
+        setTimeout(() => {
+            if(this.value === 'sony') {
+                modelSelect.innerHTML = `
+                    <option value="">Selecione o modelo</option>
+                    <option value="ps5">PlayStation 5 Slim</option>
+                    <option value="ps4">PlayStation 4 Pro</option>
+                `;
+            } else {
+                modelSelect.innerHTML = '<option value="generic">Modelo Padrão da Marca</option>';
+            }
+        }, 300);
+    });
 
-        tbody.innerHTML = filtered.map(item => `
-            <tr>
-                <td><strong>${item.name}</strong></td>
-                <td>${item.platform.toUpperCase()}</td>
-                <td>${item.date}</td>
-                <td class="price-tag">R$ ${item.price.toLocaleString('pt-BR')}</td>
-            </tr>
-        `).join('');
+    function showResult() {
+        const brand = document.getElementById('select-brand').value;
+        if(!brand) {
+            alert('Por favor, selecione os campos para pesquisar.');
+            return;
+        }
+        document.getElementById('result-box').style.display = 'block';
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
-
-    // Iniciar tabela
-    window.onload = applyFilters;
 </script>
 
 </body>
