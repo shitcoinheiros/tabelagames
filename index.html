@@ -3,251 +3,1598 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta de Valores - Tabela Games</title>
+    <title>Tabela FIPE - Fundação Instituto de Pesquisas Econômicas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Open Sans', sans-serif; }
-        body { background-color: #fff; color: #444; }
-
-        /* Barra de Logo Superior */
-        .top-bar {
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
+        /* RESET E CONFIGURAÇÕES GERAIS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        .logo-fipe {
-            height: 45px;
+
+        html, body {
+            height: 100%;
+            font-family: 'Inter', 'Open Sans', Arial, sans-serif;
+            font-size: 14px;
+            color: #333;
+            background-color: #f8f9fa;
+            line-height: 1.5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        #main-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e9ecef;
+            padding: 12px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-content {
             display: flex;
             align-items: center;
-            font-weight: 800;
-            font-size: 24px;
-            color: #003366;
-            letter-spacing: -1px;
-        }
-        .logo-fipe span { color: #f39200; }
-
-        /* Título da Página */
-        .page-title {
-            background-color: #003366;
-            color: white;
-            padding: 12px 0;
-            font-size: 18px;
-            font-weight: 600;
+            justify-content: space-between;
         }
 
-        .container { max-width: 1140px; margin: 0 auto; padding: 0 15px; }
-
-        /* Abas de Navegação (Carros, Motos, Caminhões -> Games) */
-        .nav-tabs-container { margin-top: 30px; border-bottom: 1px solid #ddd; }
-        .nav-tabs { display: flex; list-style: none; }
-        .nav-item {
-            padding: 12px 25px;
-            margin-right: 5px;
-            background-color: #f5f5f5;
-            border: 1px solid #ddd;
-            border-bottom: none;
-            border-radius: 8px 8px 0 0;
-            cursor: pointer;
-            font-weight: 600;
-            color: #003366;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-        .nav-item.active {
-            background-color: #fff;
-            color: #f39200;
-            margin-bottom: -1px;
-            border-top: 3px solid #f39200;
-        }
-        .nav-item i { margin-right: 8px; }
-
-        /* Formulário de Consulta */
-        .search-card {
-            padding: 30px;
-            border: 1px solid #ddd;
-            border-top: none;
-            background-color: #fff;
-        }
-
-        .step-item { margin-bottom: 25px; }
-        .step-label {
-            display: block;
-            font-weight: 700;
-            font-size: 13px;
-            margin-bottom: 8px;
-            color: #003366;
-        }
-
-        .custom-select {
-            width: 100%;
-            height: 45px;
-            padding: 0 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #fdfdfd;
-            font-size: 14px;
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23003366' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 15px center;
-        }
-
-        /* Botões */
-        .button-group {
+        .fipe-brand {
             display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-            margin-top: 20px;
+            align-items: center;
+            text-decoration: none;
         }
-        .btn {
-            padding: 10px 30px;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            text-transform: uppercase;
-            border: none;
-        }
-        .btn-clear { background-color: #eee; color: #666; }
-        .btn-submit { background-color: #003366; color: white; }
-        .btn-submit:hover { background-color: #002244; }
 
-        /* Tabela de Resultados (Idêntica ao modal da FIPE) */
-        .result-area {
-            margin-top: 30px;
+        .fipe-logo {
+            height: 50px;
+            width: 140px;
+            background: linear-gradient(135deg, #0056a6 0%, #003d75 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            font-family: 'Open Sans', sans-serif;
+            letter-spacing: 0.5px;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-text h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0056a6;
+            line-height: 1.2;
+            margin-bottom: 2px;
+        }
+
+        .brand-text p {
+            font-size: 12px;
+            color: #6c757d;
+            font-weight: 400;
+        }
+
+        .header-date {
+            text-align: right;
+            font-size: 13px;
+            color: #495057;
+        }
+
+        .header-date .current-month {
+            font-weight: 700;
+            color: #0056a6;
+            font-size: 14px;
+        }
+
+        /* CONTEÚDO PRINCIPAL */
+        #main-content {
+            padding: 40px 0 60px;
+            min-height: calc(100vh - 200px);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .page-title h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 10px;
+        }
+
+        .page-title p {
+            font-size: 16px;
+            color: #6c757d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* CARD DE CONSULTA ÚNICO */
+        .consultation-card {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .consultation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #0056a6 0%, #003d75 100%);
+            color: white;
+            padding: 20px;
+        }
+
+        .card-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header h3 i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .card-header .reference {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        /* FORMULÁRIO */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 14px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            background-color: #fff;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        .form-control:focus {
+            border-color: #0056a6;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 86, 166, 0.25);
+        }
+
+        .search-hint {
+            font-size: 13px;
+            color: #6c757d;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #0056a6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #004a8f;
+        }
+
+        .btn-secondary {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #218838;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-block {
+            width: 100%;
+            display: block;
+        }
+
+        .form-actions {
+            margin-top: 25px;
+        }
+
+        .alternative-link {
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .alternative-link a {
+            color: #0056a6;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .alternative-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* SEÇÃO DE INFORMAÇÕES */
+        .info-section {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            border: 1px solid #e9ecef;
+        }
+
+        .info-section h3 {
+            font-size: 20px;
+            color: #212529;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0056a6;
+        }
+
+        .info-points {
+            margin-bottom: 25px;
+        }
+
+        .info-point {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .info-point:before {
+            content: "•";
+            color: #0056a6;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 18px;
+        }
+
+        .warning-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .warning-box h4 {
+            color: #856404;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .warning-box h4 i {
+            margin-right: 10px;
+        }
+
+        .warning-box p {
+            color: #856404;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* SEÇÃO DE CURSOS */
+        .courses-section {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            border: 1px solid #e9ecef;
+        }
+
+        .courses-section h3 {
+            font-size: 20px;
+            color: #212529;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .course-card {
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            padding: 20px;
+            border-left: 4px solid #0056a6;
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-card h4 {
+            font-size: 16px;
+            color: #0056a6;
+            margin-bottom: 10px;
+        }
+
+        .course-card p {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+
+        .course-link {
+            display: inline-block;
+            color: #0056a6;
+            font-weight: 600;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .course-link:hover {
+            text-decoration: underline;
+        }
+
+        /* RESULTADO DA CONSULTA */
+        .result-section {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            border: 1px solid #0056a6;
             display: none;
         }
-        .fipe-table-result {
-            width: 100%;
-            border: 1px solid #ddd;
-            border-collapse: collapse;
-        }
-        .fipe-table-result tr td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
-            font-size: 14px;
-        }
-        .fipe-table-result tr td:first-child {
-            background-color: #f9f9f9;
-            font-weight: 700;
-            color: #003366;
-            width: 30%;
-        }
-        .price-text {
-            color: #003366;
-            font-weight: 800;
-            font-size: 18px;
+
+        .result-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
         }
 
-        .disclaimer {
-            font-size: 11px;
-            color: #999;
-            margin-top: 15px;
-            line-height: 1.4;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .result-header h3 {
+            font-size: 22px;
+            color: #0056a6;
+            font-weight: 700;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .vehicle-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .detail-item {
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: #6c757d;
+            font-weight: 600;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            color: #212529;
+            font-weight: 600;
+        }
+
+        .price-container {
+            background-color: #e8f4fd;
+            border: 2px solid #0056a6;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .price-label {
+            font-size: 16px;
+            color: #495057;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .price-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: #0056a6;
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+
+        .price-period {
+            font-size: 14px;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        /* FOOTER */
+        #main-footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 40px 0 20px;
+            border-top: 4px solid #0056a6;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #4a6572;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #4a6572;
+            font-size: 13px;
+            color: #95a5a6;
+        }
+
+        /* MODAL DE COMPARTILHAR */
+        .share-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .share-modal.active {
+            display: flex;
+        }
+
+        .share-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .share-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .share-header h3 {
+            font-size: 20px;
+            color: #0056a6;
+            margin: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #6c757d;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .share-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .share-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .share-option:hover {
+            background-color: #f8f9fa;
+            border-color: #0056a6;
+        }
+
+        .share-option i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #0056a6;
+        }
+
+        .share-option span {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .share-link {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .share-link input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ced4da;
+            border-radius: 6px 0 0 6px;
+            font-size: 14px;
+        }
+
+        .share-link button {
+            padding: 10px 20px;
+            background-color: #0056a6;
+            color: white;
+            border: none;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .share-link button:hover {
+            background-color: #004a8f;
+        }
+
+        /* ESTILOS PARA IMPRESSÃO */
+        @media print {
+            /* Esconder elementos não necessários na impressão */
+            #main-header,
+            .consultation-card,
+            .info-section,
+            .courses-section,
+            #main-footer,
+            .result-actions,
+            .btn {
+                display: none !important;
+            }
+            
+            /* Exibir apenas o resultado */
+            .result-section {
+                display: block !important;
+                border: 2px solid #000;
+                box-shadow: none;
+                margin: 0;
+                padding: 20px;
+                page-break-inside: avoid;
+            }
+            
+            /* Layout específico para impressão */
+            .print-only {
+                display: block !important;
+            }
+            
+            .print-header {
+                text-align: center;
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+                border-bottom: 3px solid #0056a6;
+            }
+            
+            .print-header h2 {
+                font-size: 24px;
+                color: #0056a6;
+                margin-bottom: 10px;
+            }
+            
+            .print-logo {
+                text-align: center;
+                margin-bottom: 20px;
+                font-size: 20px;
+                font-weight: bold;
+                color: #0056a6;
+            }
+            
+            .print-details {
+                margin: 30px 0;
+            }
+            
+            .print-detail-row {
+                display: flex;
+                margin-bottom: 15px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid #ddd;
+            }
+            
+            .print-detail-label {
+                font-weight: bold;
+                width: 150px;
+                color: #0056a6;
+            }
+            
+            .print-detail-value {
+                flex: 1;
+            }
+            
+            .print-price {
+                text-align: center;
+                margin: 40px 0;
+                padding: 30px;
+                border: 3px solid #0056a6;
+                border-radius: 8px;
+            }
+            
+            .print-price-value {
+                font-size: 42px;
+                font-weight: bold;
+                color: #0056a6;
+                margin: 15px 0;
+            }
+            
+            .print-footer {
+                margin-top: 50px;
+                padding-top: 20px;
+                border-top: 2px solid #ddd;
+                font-size: 12px;
+                color: #666;
+                text-align: center;
+            }
+            
+            /* Ajustes gerais para impressão */
+            body {
+                background-color: white !important;
+                color: black !important;
+                font-size: 12pt !important;
+                line-height: 1.4 !important;
+            }
+            
+            .container {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            
+            #main-content {
+                padding: 20px !important;
+            }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .fipe-brand {
+                margin-bottom: 15px;
+            }
+            
+            .consultation-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .vehicle-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .result-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .result-header h3 {
+                margin-bottom: 15px;
+            }
+            
+            .result-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .share-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* UTILITÁRIOS */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mb-0 {
+            margin-bottom: 0;
+        }
+        
+        .mt-20 {
+            margin-top: 20px;
+        }
+        
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+        
+        .print-only {
+            display: none;
         }
     </style>
 </head>
 <body>
+    <!-- HEADER -->
+    <header id="main-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="fipe-brand">
+                    <div class="fipe-logo">
+                        <span>FIPE</span>
+                    </div>
+                    <div class="brand-text">
+                        <h1>Fundação Instituto de Pesquisas Econômicas</h1>
+                        <p>Tabela FIPE - Preço Médio de Veículos</p>
+                    </div>
+                </a>
+                <div class="header-date">
+                    <p>Consulta de Preços</p>
+                    <p class="current-month">Referência: Junho/2024</p>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<div class="top-bar">
-    <div class="container">
-        <div class="logo-fipe">TABELA<span>GAMES</span></div>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main id="main-content">
+        <div class="container">
+            <!-- TÍTULO PRINCIPAL -->
+            <div class="page-title">
+                <h2>Preço Médio de Veículos</h2>
+                <p>Consulte o preço médio de veículos no mercado nacional. A Tabela FIPE expressa preços médios praticados na revenda para o consumidor final.</p>
+            </div>
+
+            <!-- CARD DE CONSULTA DE CARROS (ÚNICO) -->
+            <div class="consultation-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-car"></i> Consulta de Carros e Utilitários Pequenos</h3>
+                    <div class="reference" id="reference-date">Sua pesquisa será realizada de acordo com o seguinte mês e ano de referência: Junho/2024</div>
+                </div>
+                <div class="card-body">
+                    <p class="search-hint mb-20">Informe primeiro a marca do veículo e depois o modelo e o ano modelo na ordem que desejar. Você também pode digitar a informação no campo "busca", dentro de cada opção do formulário da pesquisa.</p>
+                    
+                    <div class="form-group">
+                        <label for="car-brand">Marca</label>
+                        <select class="form-control" id="car-brand">
+                            <option value="">Selecione a marca</option>
+                            <option value="fiat">Fiat</option>
+                            <option value="volkswagen">Volkswagen</option>
+                            <option value="chevrolet">Chevrolet</option>
+                            <option value="ford">Ford</option>
+                            <option value="hyundai">Hyundai</option>
+                            <option value="toyota">Toyota</option>
+                            <option value="honda">Honda</option>
+                            <option value="renault">Renault</option>
+                            <option value="jeep">Jeep</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="car-model">Modelo</label>
+                        <select class="form-control" id="car-model" disabled>
+                            <option value="">Selecione o modelo</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="car-year">Ano Modelo</label>
+                        <select class="form-control" id="car-year" disabled>
+                            <option value="">Selecione o ano</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary btn-block" id="btn-consult">Consultar Preço</button>
+                    </div>
+                    
+                    <div class="alternative-link">
+                        <a href="#" id="toggle-code-search"><i class="fas fa-key"></i> Consultar por Código FIPE</a>
+                    </div>
+                    
+                    <!-- Formulário alternativo para código FIPE -->
+                    <div id="code-search-form" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e9ecef;">
+                        <div class="form-group">
+                            <label for="fipe-code">Código FIPE</label>
+                            <input type="text" class="form-control" id="fipe-code" placeholder="Ex: 001001-1">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="code-year">Ano Modelo</label>
+                            <select class="form-control" id="code-year">
+                                <option value="">Selecione o ano</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" class="btn btn-secondary btn-block" id="btn-consult-code">Consultar por Código</button>
+                        
+                        <div class="alternative-link">
+                            <a href="#" id="toggle-normal-search"><i class="fas fa-car"></i> Voltar para consulta por marca/modelo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO DE INFORMAÇÕES -->
+            <div class="info-section">
+                <h3><i class="fas fa-info-circle"></i> Informações Importantes</h3>
+                
+                <div class="info-points">
+                    <div class="info-point">
+                        <p>A Tabela FIPE expressa preços médios para pagamento à vista, praticados na revenda de veículos para o consumidor final, pessoa física, no mercado nacional, servindo apenas como um parâmetro para negociações ou avaliações.</p>
+                    </div>
+                    <div class="info-point">
+                        <p>Os preços efetivamente praticados variam em função da região, conservação, cor, acessórios ou qualquer outro fator que possa influenciar as condições de oferta e procura por um veículo específico.</p>
+                    </div>
+                    <div class="info-point">
+                        <p>O ano do veículo refere-se ao ano do modelo e não são considerados veículos para uso profissional ou especial.</p>
+                    </div>
+                    <div class="info-point">
+                        <p>Os valores são expressos em R$ (reais) do mês/ano de referência.</p>
+                    </div>
+                </div>
+                
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Comunicado importante</h4>
+                    <p>A Tabela FIPE disponibiliza oficialmente e exclusivamente através deste canal consulta pública ao preço médio de veículos, sendo necessário consultar modelo a modelo desejado.</p>
+                    <p class="mb-0">NÃO disponibilizamos download de qualquer tipo de arquivo, contendo a base completa ou parcial. NÃO disponibilizamos serviço de API.</p>
+                </div>
+            </div>
+
+            <!-- SEÇÃO DE CURSOS -->
+            <div class="courses-section">
+                <h3><i class="fas fa-graduation-cap"></i> Cursos FIPE</h3>
+                
+                <div class="courses-grid">
+                    <div class="course-card">
+                        <h4>MBA Gestão Estratégica de Negócios e Economia Empresarial</h4>
+                        <p>Programa de pós-graduação com foco em estratégia empresarial e economia aplicada aos negócios.</p>
+                        <a href="#" class="course-link">Saiba Mais</a>
+                    </div>
+                    
+                    <div class="course-card">
+                        <h4>Cursos EAD FIPE</h4>
+                        <p>Diversos temas das áreas de Economia, Finanças e Negócios são abordados nos programas EaD FIPE.</p>
+                        <a href="#" class="course-link">Saiba Mais</a>
+                    </div>
+                    
+                    <div class="course-card">
+                        <h4>MBA Economia, Setor Financeiro e Finanças Empresariais</h4>
+                        <p>Especialização avançada em economia financeira e gestão de recursos empresariais.</p>
+                        <a href="#" class="course-link">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESULTADO DA CONSULTA -->
+            <div class="result-section" id="result-section">
+                <!-- Conteúdo para impressão (visível apenas na impressão) -->
+                <div class="print-only">
+                    <div class="print-header">
+                        <div class="print-logo">FIPE - Fundação Instituto de Pesquisas Econômicas</div>
+                        <h2>Consulta Tabela FIPE - Resultado Oficial</h2>
+                        <p>Documento gerado em: <span id="print-date"></span></p>
+                    </div>
+                    
+                    <div class="print-details">
+                        <div class="print-detail-row">
+                            <div class="print-detail-label">Mês de referência:</div>
+                            <div class="print-detail-value" id="print-ref-month"></div>
+                        </div>
+                        <div class="print-detail-row">
+                            <div class="print-detail-label">Código FIPE:</div>
+                            <div class="print-detail-value" id="print-code"></div>
+                        </div>
+                        <div class="print-detail-row">
+                            <div class="print-detail-label">Marca:</div>
+                            <div class="print-detail-value" id="print-brand"></div>
+                        </div>
+                        <div class="print-detail-row">
+                            <div class="print-detail-label">Modelo:</div>
+                            <div class="print-detail-value" id="print-model"></div>
+                        </div>
+                        <div class="print-detail-row">
+                            <div class="print-detail-label">Ano Modelo:</div>
+                            <div class="print-detail-value" id="print-year"></div>
+                        </div>
+                        <div class="print-detail-row">
+                            <div class="print-detail-label">Autenticação:</div>
+                            <div class="print-detail-value" id="print-auth"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="print-price">
+                        <div class="price-label">Preço Médio do Veículo</div>
+                        <div class="print-price-value" id="print-price"></div>
+                        <div class="price-period">Mês de referência: <span id="print-ref-month2"></span></div>
+                    </div>
+                    
+                    <div class="print-footer">
+                        <p>Este documento foi gerado a partir da consulta oficial à Tabela FIPE.</p>
+                        <p>Para verificar a autenticidade desta consulta, acesse: https://veiculos.fipe.org.br</p>
+                        <p>Documento válido apenas para fins de referência e negociação.</p>
+                    </div>
+                </div>
+                
+                <!-- Conteúdo normal (visível na tela) -->
+                <div class="result-header">
+                    <h3><i class="fas fa-search"></i> Resultado da Consulta</h3>
+                    <div class="result-actions">
+                        <button class="btn btn-primary" id="btn-print">
+                            <i class="fas fa-print"></i> Imprimir
+                        </button>
+                        <button class="btn btn-secondary" id="btn-share">
+                            <i class="fas fa-share-alt"></i> Compartilhar
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="vehicle-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Mês de referência</div>
+                        <div class="detail-value" id="result-month">Junho/2024</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Código FIPE</div>
+                        <div class="detail-value" id="result-code">001234-5</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Marca</div>
+                        <div class="detail-value" id="result-brand">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Modelo</div>
+                        <div class="detail-value" id="result-model">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Ano Modelo</div>
+                        <div class="detail-value" id="result-year">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Autenticação</div>
+                        <div class="detail-value" id="result-auth">CONSULTA VÁLIDA</div>
+                    </div>
+                </div>
+                
+                <div class="price-container">
+                    <div class="price-label">Preço Médio</div>
+                    <div class="price-value" id="result-price">R$ 0,00</div>
+                    <div class="price-period" id="result-period">Data da consulta: -</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Entre em contato</h4>
+                    <p>Entre em contato conosco pelo e-mail:</p>
+                    <p><strong>veiculos@fipe.org.br</strong></p>
+                    <p class="mt-20">Para ter certeza que está navegando no site da Fipe basta verificar o endereço de URL que deve ser <strong>www.fipe.org.br</strong> ou <strong>veiculos.fipe.org.br</strong>.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Links Úteis</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-download"></i> Download do App Oficial</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Perguntas Frequentes</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> Publicações FIPE</a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> Indicadores Econômicos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Fundação Instituto de Pesquisas Econômicas</h4>
+                    <p>Av. Prof. Luciano Gualberto, 908 - Butantã<br>
+                    São Paulo - SP, 05508-900<br>
+                    Telefone: (11) 3091-5800</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Fundação Instituto de Pesquisas Econômicas - FIPE. Todos os direitos reservados.</p>
+                <p>Esta é uma réplica para fins de estudo. Site oficial disponível em: <a href="https://veiculos.fipe.org.br" style="color: #95a5a6;">veiculos.fipe.org.br</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DE COMPARTILHAR -->
+    <div class="share-modal" id="share-modal">
+        <div class="share-content">
+            <div class="share-header">
+                <h3><i class="fas fa-share-alt"></i> Compartilhar Consulta</h3>
+                <button class="close-modal" id="close-share-modal">&times;</button>
+            </div>
+            
+            <p>Compartilhe esta consulta da Tabela FIPE:</p>
+            
+            <div class="share-options">
+                <div class="share-option" id="share-whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </div>
+                
+                <div class="share-option" id="share-facebook">
+                    <i class="fab fa-facebook"></i>
+                    <span>Facebook</span>
+                </div>
+                
+                <div class="share-option" id="share-twitter">
+                    <i class="fab fa-twitter"></i>
+                    <span>Twitter</span>
+                </div>
+                
+                <div class="share-option" id="share-email">
+                    <i class="fas fa-envelope"></i>
+                    <span>E-mail</span>
+                </div>
+            </div>
+            
+            <div class="share-link">
+                <input type="text" id="share-url" readonly value="https://veiculos.fipe.org.br/consulta">
+                <button id="copy-link"><i class="fas fa-copy"></i> Copiar</button>
+            </div>
+            
+            <div style="margin-top: 15px; font-size: 12px; color: #6c757d;">
+                <p><i class="fas fa-info-circle"></i> O link contém os dados da consulta atual para compartilhamento.</p>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="page-title">
-    <div class="container">
-        Índice de Preços de Games e Consoles
-    </div>
-</div>
+    <script>
+        // Dados simulados para as consultas
+        const vehicleData = {
+            fiat: {
+                modelos: ["Argo Drive 1.0", "Mobi Like 1.0", "Cronos Drive 1.3", "Strada Volcye 1.3", "Toro Freedom 1.8"],
+                anos: ["2024", "2023", "2022", "2021", "2020"],
+                precoBase: 65000
+            },
+            volkswagen: {
+                modelos: ["Polo 1.0 MSI", "Virtus 1.0 TSI", "T-Cross 1.0 TSI", "Gol 1.0 MSI", "Nivus 1.0 TSI"],
+                anos: ["2024", "2023", "2022", "2021", "2020"],
+                precoBase: 75000
+            },
+            chevrolet: {
+                modelos: ["Onix 1.0 MT", "Onix Plus 1.0 Turbo", "Tracker 1.2 Turbo", "Spin 1.8", "Cruze 1.4 Turbo"],
+                anos: ["2024", "2023", "2022", "2021", "2020"],
+                precoBase: 70000
+            },
+            ford: {
+                modelos: ["Ka 1.0 SE", "EcoSport 1.5 SE", "Ranger 2.2 XL", "Territory 1.5 Turbo", "Mustang 5.0 V8"],
+                anos: ["2024", "2023", "2022", "2021", "2020"],
+                precoBase: 68000
+            },
+            hyundai: {
+                modelos: ["HB20 1.0 Comfort", "Creta 1.6 Comfort", "Tucson 2.0 GL", "HB20S 1.0 Turbo", "Santa Fe 3.5 V6"],
+                anos: ["2024", "2023", "2022", "2021", "2020"],
+                precoBase: 72000
+            },
+            toyota: {
+                modelos: ["Corolla 2.0 XEi", "Hilux 2.8 SRX", "SW4 4x4 Diesel", "Yaris 1.5 XS", "RAV4 2.5 Hybrid"],
+                anos: ["2024", "2023", "2022", "2021", "2020"],
+                precoBase: 95000
+            },
+            honda: {
+                modelos: ["Civic 2.0 Touring", "HR-V 1.5 Turbo", "WR-V 1.5 Flex", "City 1.5 LX", "Accord 2.0 Turbo"],
+                anos: ["2024", "2023", "2022", "2021", "2020"],
+                precoBase: 85000
+            },
+            renault: {
+                modelos: ["Kwid 1.0 Life", "Duster 1.6 Zen", "Captur 1.6 Intense", "Sandero 1.0 Life", "Logan 1.0 Life"],
+                anos: ["2024", "2023", "2022", "2021", "2020"],
+                precoBase: 60000
+            },
+            jeep: {
+                modelos: ["Renegade 1.8 Sport", "Compass 2.0 Limited", "Wrangler 3.6 Rubicon", "Grand Cherokee 3.6"],
+                anos: ["2024", "2023", "2022", "2021", "2020"],
+                precoBase: 110000
+            }
+        };
 
-<div class="container">
-    <div class="nav-tabs-container">
-        <ul class="nav-tabs">
-            <li class="nav-item active"><i class="fas fa-gamepad"></i> Consulta de Consoles</li>
-            <li class="nav-item"><i class="fas fa-compact-disc"></i> Consulta de Jogos</li>
-            <li class="nav-item"><i class="fas fa-headset"></i> Acessórios</li>
-        </ul>
-    </div>
+        // Variável para armazenar dados da consulta atual
+        let currentConsultation = null;
 
-    <div class="search-card">
-        <div class="step-item">
-            <label class="step-label">1: SELECIONE A MARCA DO CONSOLE</label>
-            <select class="custom-select" id="brand">
-                <option value="">Selecione a marca</option>
-                <option value="sony">Sony (PlayStation)</option>
-                <option value="microsoft">Microsoft (Xbox)</option>
-                <option value="nintendo">Nintendo</option>
-            </select>
-        </div>
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar datas
+            const currentDate = new Date();
+            const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
+                               "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+            
+            const currentMonth = monthNames[currentDate.getMonth()];
+            const currentYear = currentDate.getFullYear();
+            const formattedDate = `${currentDate.getDate().toString().padStart(2, '0')}/${(currentDate.getMonth()+1).toString().padStart(2, '0')}/${currentYear}`;
+            
+            // Atualizar referências de data
+            document.querySelector('.current-month').textContent = `Referência: ${currentMonth}/${currentYear}`;
+            document.getElementById('reference-date').textContent = `Sua pesquisa será realizada de acordo com o seguinte mês e ano de referência: ${currentMonth}/${currentYear}`;
+            
+            // Configurar eventos dos formulários
+            setupFormEvents();
+            
+            // Configurar botão de imprimir
+            document.getElementById('btn-print').addEventListener('click', function() {
+                printConsultation();
+            });
+            
+            // Configurar botão de compartilhar
+            document.getElementById('btn-share').addEventListener('click', function() {
+                openShareModal();
+            });
+            
+            // Configurar modal de compartilhamento
+            setupShareModal();
+            
+            // Configurar alternância entre formulários
+            document.getElementById('toggle-code-search').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('code-search-form').style.display = 'block';
+                this.parentElement.style.display = 'none';
+            });
+            
+            document.getElementById('toggle-normal-search').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('code-search-form').style.display = 'none';
+                document.getElementById('toggle-code-search').parentElement.style.display = 'block';
+            });
+            
+            // Configurar consulta por código
+            document.getElementById('btn-consult-code').addEventListener('click', function() {
+                const fipeCode = document.getElementById('fipe-code').value;
+                const codeYear = document.getElementById('code-year').value;
+                
+                if (!fipeCode || !codeYear) {
+                    alert('Por favor, informe o código FIPE e o ano modelo.');
+                    return;
+                }
+                
+                // Simular consulta por código
+                const randomBrand = Object.keys(vehicleData)[Math.floor(Math.random() * Object.keys(vehicleData).length)];
+                const brandName = document.querySelector(`#car-brand option[value="${randomBrand}"]`).textContent;
+                const modelName = vehicleData[randomBrand].modelos[Math.floor(Math.random() * vehicleData[randomBrand].modelos.length)];
+                
+                const basePrice = vehicleData[randomBrand].precoBase;
+                const yearDiff = 2024 - parseInt(codeYear);
+                const priceMultiplier = 1 - (yearDiff * 0.1);
+                const adjustedPrice = Math.round(basePrice * priceMultiplier / 1000) * 1000;
+                
+                showResult(brandName, modelName, codeYear, adjustedPrice, fipeCode);
+                
+                // Armazenar dados da consulta
+                currentConsultation = {
+                    brand: brandName,
+                    model: modelName,
+                    year: codeYear,
+                    price: adjustedPrice,
+                    code: fipeCode,
+                    type: 'Carro',
+                    date: formattedDate,
+                    reference: `${currentMonth}/${currentYear}`
+                };
+            });
+        });
 
-        <div class="step-item">
-            <label class="step-label">2: SELECIONE O MODELO</label>
-            <select class="custom-select" id="model">
-                <option value="">Selecione o modelo</option>
-            </select>
-        </div>
-
-        <div class="step-item">
-            <label class="step-label">3: SELECIONE O ANO MODELO</label>
-            <select class="custom-select" id="year">
-                <option value="">Selecione o ano</option>
-                <option value="2024">Zero KM (Lacrado)</option>
-                <option value="2023">Usado / 2023</option>
-            </select>
-        </div>
-
-        <div class="button-group">
-            <button class="btn btn-clear" onclick="location.reload()">Limpar</button>
-            <button class="btn btn-submit" onclick="search()">Pesquisar</button>
-        </div>
-
-        <div class="result-area" id="results">
-            <table class="fipe-table-result">
-                <tr><td>Mês de referência:</td><td>janeiro de 2026</td></tr>
-                <tr><td>Código Fipe-Game:</td><td>005240-X</td></tr>
-                <tr><td>Marca:</td><td id="res-brand">Sony</td></tr>
-                <tr><td>Modelo:</td><td id="res-model">PlayStation 5 Pro 2TB</td></tr>
-                <tr><td>Ano Modelo:</td><td id="res-year">Zero KM</td></tr>
-                <tr><td>Preço Médio:</td><td class="price-text">R$ 6.899,00</td></tr>
-            </table>
-            <p class="disclaimer">
-                Data da consulta: quinta-feira, 8 de janeiro de 2026 14:20. Preços baseados em pesquisa de mercado nacional. O valor pode variar de acordo com o estado de conservação.
-            </p>
-        </div>
-    </div>
-</div>
-
-<script>
-    // Simulação de comportamento idêntico ao site da FIPE
-    document.getElementById('brand').addEventListener('change', function() {
-        const model = document.getElementById('model');
-        if(this.value === 'sony') {
-            model.innerHTML = `
-                <option value="">Selecione o modelo</option>
-                <option value="ps5pro">PlayStation 5 Pro</option>
-                <option value="ps5slim">PlayStation 5 Slim</option>
-                <option value="ps4">PlayStation 4 500GB</option>
-            `;
-        } else if(this.value === 'microsoft') {
-            model.innerHTML = `
-                <option value="">Selecione o modelo</option>
-                <option value="seriesx">Xbox Series X</option>
-                <option value="seriess">Xbox Series S</option>
-            `;
+        // Configurar eventos dos formulários
+        function setupFormEvents() {
+            // Formulário de carros
+            const carBrand = document.getElementById('car-brand');
+            const carModel = document.getElementById('car-model');
+            const carYear = document.getElementById('car-year');
+            const btnConsult = document.getElementById('btn-consult');
+            
+            carBrand.addEventListener('change', function() {
+                if (this.value) {
+                    carModel.disabled = false;
+                    populateModelSelect(carModel, vehicleData[this.value].modelos);
+                } else {
+                    carModel.disabled = true;
+                    carYear.disabled = true;
+                    carModel.innerHTML = '<option value="">Selecione o modelo</option>';
+                    carYear.innerHTML = '<option value="">Selecione o ano</option>';
+                }
+            });
+            
+            carModel.addEventListener('change', function() {
+                if (this.value && carBrand.value) {
+                    carYear.disabled = false;
+                    populateYearSelect(carYear, vehicleData[carBrand.value].anos);
+                } else {
+                    carYear.disabled = true;
+                    carYear.innerHTML = '<option value="">Selecione o ano</option>';
+                }
+            });
+            
+            btnConsult.addEventListener('click', function() {
+                if (carBrand.value && carModel.value && carYear.value) {
+                    const brand = carBrand.options[carBrand.selectedIndex].text;
+                    const model = carModel.options[carModel.selectedIndex].text;
+                    const year = carYear.value;
+                    const basePrice = vehicleData[carBrand.value].precoBase;
+                    
+                    // Gerar código FIPE aleatório
+                    const fipeCode = generateFipeCode(carBrand.value, year);
+                    
+                    showResult(brand, model, year, basePrice, fipeCode);
+                    
+                    // Armazenar dados da consulta
+                    const currentDate = new Date();
+                    const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
+                                       "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+                    const currentMonth = monthNames[currentDate.getMonth()];
+                    const currentYear = currentDate.getFullYear();
+                    const formattedDate = `${currentDate.getDate().toString().padStart(2, '0')}/${(currentDate.getMonth()+1).toString().padStart(2, '0')}/${currentYear} ${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}`;
+                    
+                    currentConsultation = {
+                        brand: brand,
+                        model: model,
+                        year: year,
+                        price: basePrice,
+                        code: fipeCode,
+                        type: 'Carro',
+                        date: formattedDate,
+                        reference: `${currentMonth}/${currentYear}`
+                    };
+                } else {
+                    alert('Por favor, selecione a marca, modelo e ano do veículo.');
+                }
+            });
         }
-    });
 
-    function search() {
-        const brand = document.getElementById('brand').value;
-        const model = document.getElementById('model').value;
-        if(!brand || !model) {
-            alert('Selecione todos os campos.');
-            return;
+        // Popular select de modelos
+        function populateModelSelect(selectElement, modelos) {
+            selectElement.innerHTML = '<option value="">Selecione o modelo</option>';
+            
+            modelos.forEach(modelo => {
+                const option = document.createElement('option');
+                option.value = modelo.toLowerCase().replace(/\s+/g, '-');
+                option.textContent = modelo;
+                selectElement.appendChild(option);
+            });
         }
-        document.getElementById('results').style.display = 'block';
-        window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
-    }
-</script>
 
+        // Popular select de anos
+        function populateYearSelect(selectElement, anos) {
+            selectElement.innerHTML = '<option value="">Selecione o ano</option>';
+            
+            anos.forEach(ano => {
+                const option = document.createElement('option');
+                option.value = ano;
+                option.textContent = ano;
+                selectElement.appendChild(option);
+            });
+        }
+
+        // Gerar código FIPE
+        function generateFipeCode(brand, year) {
+            const brandCodes = {
+                fiat: '001',
+                volkswagen: '002', 
+                chevrolet: '003',
+                ford: '004',
+                hyundai: '005',
+                toyota: '006',
+                honda: '007',
+                renault: '008',
+                jeep: '009'
+            };
+            
+            const brandCode = brandCodes[brand] || '010';
+            const randomNum = Math.floor(100 + Math.random() * 900);
+            const version = year === '2024' ? '1' : '0';
+            
+            return `${brandCode}${randomNum}-${version}`;
+        }
+
+        // Mostrar resultado da consulta
+        function showResult(brand, model, year, basePrice, fipeCode) {
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getDate().toString().padStart(2, '0')}/${(currentDate.getMonth()+1).toString().padStart(2, '0')}/${currentDate.getFullYear()} ${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}`;
+            
+            // Calcular preço ajustado
+            const yearDiff = 2024 - parseInt(year);
+            const priceMultiplier = 1 - (yearDiff * 0.1);
+            const adjustedPrice = Math.round(basePrice * priceMultiplier / 1000) * 1000;
+            
+            // Atualizar elementos do resultado
+            document.getElementById('result-brand').textContent = brand;
+            document.getElementById('result-model').textContent = model;
+            document.getElementById('result-year').textContent = year;
+            document.getElementById('result-code').textContent = fipeCode;
+            document.getElementById('result-price').textContent = `R$ ${adjustedPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('result-period').textContent = `Data da consulta: ${formattedDate}`;
+            
+            // Atualizar elementos de impressão
+            document.getElementById('print-brand').textContent = brand;
+            document.getElementById('print-model').textContent = model;
+            document.getElementById('print-year').textContent = year;
+            document.getElementById('print-code').textContent = fipeCode;
+            document.getElementById('print-price').textContent = `R$ ${adjustedPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('print-date').textContent = formattedDate;
+            document.getElementById('print-ref-month').textContent = `Junho/${currentDate.getFullYear()}`;
+            document.getElementById('print-ref-month2').textContent = `Junho/${currentDate.getFullYear()}`;
+            document.getElementById('print-auth').textContent = 'CONSULTA VÁLIDA - DOCUMENTO OFICIAL';
+            
+            // Mostrar seção de resultado
+            const resultSection = document.getElementById('result-section');
+            resultSection.classList.add('active');
+            
+            // Scroll para o resultado
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Atualizar URL de compartilhamento
+            updateShareUrl(brand, model, year, adjustedPrice, fipeCode);
+        }
+
+        // Configurar modal de compartilhamento
+        function setupShareModal() {
+            const shareModal = document.getElementById('share-modal');
+            const closeModal = document.getElementById('close-share-modal');
+            const copyLinkBtn = document.getElementById('copy-link');
+            
+            // Fechar modal
+            closeModal.addEventListener('click', function() {
+                shareModal.classList.remove('active');
+            });
+            
+            // Fechar ao clicar fora do conteúdo
+            shareModal.addEventListener('click', function(e) {
+                if (e.target === shareModal) {
+                    shareModal.classList.remove('active');
+                }
+            });
+            
+            // Copiar link
+            copyLinkBtn.addEventListener('click', function() {
+                const shareUrl = document.getElementById('share-url');
+                shareUrl.select();
+                shareUrl.setSelectionRange(0, 99999); // Para dispositivos móveis
+                
+                try {
+                    navigator.clipboard.writeText(shareUrl.value);
+                    copyLinkBtn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                    setTimeout(() => {
+                        copyLinkBtn.innerHTML = '<i class="fas fa-copy"></i> Copiar';
+                    }, 2000);
+                } catch (err) {
+                    // Fallback para navegadores mais antigos
+                    document.execCommand('copy');
+                    copyLinkBtn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                    setTimeout(() => {
+                        copyLinkBtn.innerHTML = '<i class="fas fa-copy"></i> Copiar';
+                    }, 2000);
+                }
+            });
+            
+            // Opções de compartilhamento
+            document.getElementById('share-whatsapp').addEventListener('click', function() {
+                shareViaWhatsApp();
+            });
+            
+            document.getElementById('share-facebook').addEventListener('click', function() {
+                shareViaFacebook();
+            });
+            
+            document.getElementById('share-twitter').addEventListener('click', function() {
+                shareViaTwitter();
+            });
+            
+            document.getElementById('share-email').addEventListener('click', function() {
+                shareViaEmail();
+            });
+        }
+
+        // Abrir modal de compartilhamento
+        function openShareModal() {
+            if (!currentConsultation) {
+                alert('Realize uma consulta primeiro para compartilhar.');
+                return;
+            }
+            
+            document.getElementById('share-modal').classList.add('active');
+        }
+
+        // Atualizar URL de compartilhamento
+        function updateShareUrl(brand, model, year, price, code) {
+            const baseUrl = window.location.href.split('?')[0];
+            const shareText = `Consulta FIPE: ${brand} ${model} ${year} - Preço: R$ ${price.toLocaleString('pt-BR')} - Código: ${code}`;
+            const shareUrl = `${baseUrl}?consulta=${encodeURIComponent(JSON.stringify({brand, model, year, price, code}))}`;
+            
+            document.getElementById('share-url').value = shareUrl;
+            currentConsultation.shareUrl = shareUrl;
+            currentConsultation.shareText = shareText;
+        }
+
+        // Compartilhar via WhatsApp
+        function shareViaWhatsApp() {
+            if (!currentConsultation) return;
+            
+            const text = `Consulta Tabela FIPE\n\nVeículo: ${currentConsultation.brand} ${currentConsultation.model} ${currentConsultation.year}\nPreço Médio: R$ ${currentConsultation.price.toLocaleString('pt-BR')}\nCódigo FIPE: ${currentConsultation.code}\nMês de Referência: ${currentConsultation.reference}\n\nCompartilhado via Tabela FIPE`;
+            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        // Compartilhar via Facebook
+        function shareViaFacebook() {
+            if (!currentConsultation) return;
+            
+            const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentConsultation.shareUrl)}&quote=${encodeURIComponent(currentConsultation.shareText)}`;
+            window.open(url, '_blank', 'width=600,height=400');
+        }
+
+        // Compartilhar via Twitter
+        function shareViaTwitter() {
+            if (!currentConsultation) return;
+            
+            const text = `Consulta Tabela FIPE: ${currentConsultation.brand} ${currentConsultation.model} ${currentConsultation.year} - R$ ${currentConsultation.price.toLocaleString('pt-BR')}`;
+            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(currentConsultation.shareUrl)}`;
+            window.open(url, '_blank', 'width=600,height=400');
+        }
+
+        // Compartilhar via E-mail
+        function shareViaEmail() {
+            if (!currentConsultation) return;
+            
+            const subject = `Consulta Tabela FIPE - ${currentConsultation.brand} ${currentConsultation.model}`;
+            const body = `Prezado(a),\n\nSegue abaixo o resultado da consulta à Tabela FIPE:\n\nVeículo: ${currentConsultation.brand} ${currentConsultation.model}\nAno Modelo: ${currentConsultation.year}\nPreço Médio: R$ ${currentConsultation.price.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}\nCódigo FIPE: ${currentConsultation.code}\nMês de Referência: ${currentConsultation.reference}\nData da Consulta: ${currentConsultation.date}\n\nEste é um documento de referência para negociação.\n\nAtenciosamente,\nFIPE - Fundação Instituto de Pesquisas Econômicas`;
+            const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            window.location.href = mailtoLink;
+        }
+
+        // Imprimir consulta
+        function printConsultation() {
+            if (!currentConsultation) {
+                alert('Realize uma consulta primeiro para imprimir.');
+                return;
+            }
+            
+            window.print();
+        }
+    </script>
 </body>
 </html>
