@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabela FIPE - Fundação Instituto de Pesquisas Econômicas</title>
+    <title>Tabela FIPE Gamer - Preços de Games e Consoles</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Exo+2:wght@300;400;600;700&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* RESET E CONFIGURAÇÕES GERAIS */
+        /* RESET E CONFIGURAÇÕES GERAIS - TEMA GAMER */
         * {
             margin: 0;
             padding: 0;
@@ -20,11 +20,28 @@
 
         html, body {
             height: 100%;
-            font-family: 'Inter', 'Open Sans', Arial, sans-serif;
+            font-family: 'Exo 2', 'Orbitron', Arial, sans-serif;
             font-size: 14px;
-            color: #333;
-            background-color: #f8f9fa;
+            color: #e0e0ff;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%);
             line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Efeito de partículas de fundo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container {
@@ -34,12 +51,37 @@
             padding: 0 20px;
         }
 
-        /* HEADER */
+        /* HEADER - ESTILO GAMER */
         #main-header {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e9ecef;
-            padding: 12px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            background: rgba(10, 10, 26, 0.9);
+            border-bottom: 2px solid #00ffea;
+            padding: 15px 0;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Efeito de brilho no header */
+        #main-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                #00ffea, 
+                #ff00ff, 
+                #00ffea, 
+                transparent);
+            animation: scanline 3s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
         }
 
         .header-content {
@@ -52,22 +94,52 @@
             display: flex;
             align-items: center;
             text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .fipe-brand:hover {
+            transform: scale(1.05);
         }
 
         .fipe-logo {
-            height: 50px;
-            width: 140px;
-            background: linear-gradient(135deg, #0056a6 0%, #003d75 100%);
+            height: 60px;
+            width: 160px;
+            background: linear-gradient(135deg, #ff0080 0%, #8000ff 50%, #0080ff 100%);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 24px;
-            font-family: 'Open Sans', sans-serif;
-            letter-spacing: 0.5px;
-            border-radius: 4px;
-            margin-right: 15px;
+            font-weight: 900;
+            font-size: 28px;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            border-radius: 8px;
+            margin-right: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 20px rgba(128, 0, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fipe-logo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 70%
+            );
+            animation: shine 3s infinite linear;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .brand-text {
@@ -76,177 +148,311 @@
         }
 
         .brand-text h1 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #0056a6;
+            font-size: 22px;
+            font-weight: 900;
+            color: #00ffea;
             line-height: 1.2;
-            margin-bottom: 2px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(0, 255, 234, 0.5);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
         }
 
         .brand-text p {
-            font-size: 12px;
-            color: #6c757d;
+            font-size: 13px;
+            color: #a0a0ff;
             font-weight: 400;
+            letter-spacing: 0.5px;
         }
 
         .header-date {
             text-align: right;
-            font-size: 13px;
-            color: #495057;
+            font-size: 14px;
+            color: #a0a0ff;
         }
 
         .header-date .current-month {
             font-weight: 700;
-            color: #0056a6;
-            font-size: 14px;
+            color: #ff0080;
+            font-size: 16px;
+            font-family: 'Rajdhani', sans-serif;
+            text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
         }
 
         /* CONTEÚDO PRINCIPAL */
         #main-content {
-            padding: 40px 0 60px;
+            padding: 50px 0 80px;
             min-height: calc(100vh - 200px);
         }
 
         .page-title {
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #e9ecef;
+            margin-bottom: 50px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #ff0080;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '▶';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ffea;
+            font-size: 20px;
+            background: #0a0a1a;
+            padding: 0 15px;
         }
 
         .page-title h2 {
-            font-size: 28px;
-            font-weight: 700;
-            color: #212529;
-            margin-bottom: 10px;
+            font-size: 36px;
+            font-weight: 900;
+            color: #00ffea;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(0, 255, 234, 0.7);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-title h2::before {
+            content: '🎮';
+            margin-right: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .page-title p {
-            font-size: 16px;
-            color: #6c757d;
+            font-size: 18px;
+            color: #a0a0ff;
             max-width: 800px;
             margin: 0 auto;
+            line-height: 1.6;
         }
 
-        /* CARD DE CONSULTA ÚNICO */
+        /* CARD DE CONSULTA ÚNICO - ESTILO GAMER */
         .consultation-card {
             max-width: 800px;
-            margin: 0 auto 40px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin: 0 auto 50px;
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 12px;
+            box-shadow: 
+                0 0 30px rgba(0, 255, 255, 0.2),
+                0 0 60px rgba(255, 0, 128, 0.1),
+                inset 0 0 20px rgba(0, 0, 0, 0.3);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .consultation-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ffea, #ff0080, #8000ff, #00ffea);
+            border-radius: 14px;
+            z-index: -1;
+            animation: border-glow 4s linear infinite;
+            background-size: 400% 400%;
+        }
+
+        @keyframes border-glow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .consultation-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 0 40px rgba(0, 255, 255, 0.4),
+                0 0 80px rgba(255, 0, 128, 0.2),
+                inset 0 0 30px rgba(0, 0, 0, 0.4);
         }
 
         .card-header {
-            background: linear-gradient(135deg, #0056a6 0%, #003d75 100%);
+            background: linear-gradient(135deg, #ff0080 0%, #8000ff 100%);
             color: white;
-            padding: 20px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                #00ffea, 
+                #ff00ff, 
+                #00ffea, 
+                transparent);
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .card-header h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 5px;
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
         }
 
         .card-header h3 i {
-            margin-right: 10px;
-            font-size: 20px;
+            margin-right: 15px;
+            font-size: 24px;
+            color: #00ffea;
         }
 
         .card-header .reference {
-            font-size: 13px;
+            font-size: 14px;
             opacity: 0.9;
+            color: #a0a0ff;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .card-body {
-            padding: 25px;
+            padding: 30px;
         }
 
-        /* FORMULÁRIO */
+        /* FORMULÁRIO - ESTILO GAMER */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .form-group label {
             display: block;
             font-weight: 600;
-            color: #495057;
-            margin-bottom: 8px;
-            font-size: 14px;
+            color: #00ffea;
+            margin-bottom: 10px;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .form-control {
             width: 100%;
-            padding: 12px 15px;
-            font-size: 14px;
-            border: 1px solid #ced4da;
-            border-radius: 6px;
-            background-color: #fff;
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            padding: 15px 20px;
+            font-size: 15px;
+            border: 2px solid #8000ff;
+            border-radius: 8px;
+            background: rgba(10, 10, 26, 0.7);
+            color: #e0e0ff;
+            transition: all 0.3s ease;
+            font-family: 'Exo 2', sans-serif;
         }
 
         .form-control:focus {
-            border-color: #0056a6;
-            outline: 0;
-            box-shadow: 0 0 0 0.2rem rgba(0, 86, 166, 0.25);
+            border-color: #00ffea;
+            outline: none;
+            box-shadow: 0 0 20px rgba(0, 255, 234, 0.5);
+            background: rgba(10, 10, 26, 0.9);
         }
 
         .search-hint {
-            font-size: 13px;
-            color: #6c757d;
-            margin-top: 8px;
+            font-size: 14px;
+            color: #a0a0ff;
+            margin-top: 10px;
             font-style: italic;
+            padding: 10px;
+            background: rgba(128, 0, 255, 0.1);
+            border-radius: 6px;
+            border-left: 3px solid #8000ff;
         }
 
+        /* BOTÕES - ESTILO GAMER */
         .btn {
             display: inline-block;
-            padding: 12px 24px;
-            font-size: 14px;
-            font-weight: 600;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: 700;
             text-align: center;
             text-decoration: none;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
-            background-color: #0056a6;
-            color: white;
+            background: linear-gradient(135deg, #0080ff 0%, #00ffea 100%);
+            color: #0a0a1a;
+            box-shadow: 0 0 20px rgba(0, 255, 234, 0.5);
         }
 
         .btn-primary:hover {
-            background-color: #004a8f;
+            background: linear-gradient(135deg, #00ffea 0%, #0080ff 100%);
+            box-shadow: 0 0 30px rgba(0, 255, 234, 0.7);
+            transform: translateY(-3px);
         }
 
         .btn-secondary {
-            background-color: #28a745;
+            background: linear-gradient(135deg, #ff0080 0%, #8000ff 100%);
             color: white;
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
         }
 
         .btn-secondary:hover {
-            background-color: #218838;
+            background: linear-gradient(135deg, #8000ff 0%, #ff0080 100%);
+            box-shadow: 0 0 30px rgba(255, 0, 128, 0.7);
+            transform: translateY(-3px);
         }
 
         .btn-warning {
-            background-color: #ffc107;
-            color: #212529;
+            background: linear-gradient(135deg, #ffaa00 0%, #ff5500 100%);
+            color: #0a0a1a;
+            box-shadow: 0 0 20px rgba(255, 170, 0, 0.5);
         }
 
         .btn-warning:hover {
-            background-color: #e0a800;
+            background: linear-gradient(135deg, #ff5500 0%, #ffaa00 100%);
+            box-shadow: 0 0 30px rgba(255, 170, 0, 0.7);
+            transform: translateY(-3px);
         }
 
         .btn-block {
@@ -255,276 +461,521 @@
         }
 
         .form-actions {
-            margin-top: 25px;
+            margin-top: 30px;
         }
 
         .alternative-link {
             text-align: center;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #e9ecef;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(128, 0, 255, 0.3);
         }
 
         .alternative-link a {
-            color: #0056a6;
+            color: #00ffea;
             text-decoration: none;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
+            transition: color 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .alternative-link a:hover {
-            text-decoration: underline;
+            color: #ff0080;
+            text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
+        }
+
+        /* EXEMPLO PRÉ-CARREGADO */
+        .example-consultation {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(128, 0, 255, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid #8000ff;
+            border-right: 4px solid #0080ff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .example-consultation::before {
+            content: '⚡';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: #00ffea;
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        .example-consultation p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #a0a0ff;
+        }
+
+        .example-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #ff5500 0%, #ffaa00 100%);
+            color: #0a0a1a;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            border: none;
+            font-weight: 700;
+            font-family: 'Rajdhani', sans-serif;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .example-btn:hover {
+            background: linear-gradient(135deg, #ffaa00 0%, #ff5500 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(255, 170, 0, 0.5);
         }
 
         /* SEÇÃO DE INFORMAÇÕES */
         .info-section {
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            margin-bottom: 40px;
-            border: 1px solid #e9ecef;
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 
+                0 0 30px rgba(0, 255, 255, 0.2),
+                inset 0 0 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 50px;
+            border: 2px solid #00ffea;
+            backdrop-filter: blur(10px);
         }
 
         .info-section h3 {
-            font-size: 20px;
-            color: #212529;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #0056a6;
+            font-size: 24px;
+            color: #00ffea;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ff0080;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .info-section h3 i {
+            color: #ff0080;
+            margin-right: 15px;
         }
 
         .info-points {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .info-point {
-            margin-bottom: 15px;
-            padding-left: 20px;
+            margin-bottom: 20px;
+            padding-left: 25px;
             position: relative;
+            border-left: 3px solid #8000ff;
+            padding: 15px 0 15px 20px;
+            background: rgba(128, 0, 255, 0.05);
+            border-radius: 0 8px 8px 0;
+            margin-left: -20px;
         }
 
         .info-point:before {
-            content: "•";
-            color: #0056a6;
+            content: '►';
+            color: #00ffea;
             font-weight: bold;
             position: absolute;
-            left: 0;
-            font-size: 18px;
+            left: 5px;
+            font-size: 16px;
         }
 
         .warning-box {
-            background-color: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 6px;
-            padding: 20px;
-            margin-top: 25px;
+            background: linear-gradient(135deg, rgba(255, 170, 0, 0.1) 0%, rgba(255, 85, 0, 0.1) 100%);
+            border: 2px solid #ffaa00;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning-box::before {
+            content: '⚠';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            color: #ffaa00;
+            opacity: 0.3;
         }
 
         .warning-box h4 {
-            color: #856404;
-            font-size: 16px;
-            margin-bottom: 10px;
+            color: #ffaa00;
+            font-size: 18px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
+            font-family: 'Orbitron', sans-serif;
         }
 
         .warning-box h4 i {
-            margin-right: 10px;
+            margin-right: 15px;
+            color: #ff5500;
         }
 
         .warning-box p {
-            color: #856404;
-            font-size: 14px;
-            margin-bottom: 10px;
+            color: #ffcc80;
+            font-size: 15px;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
 
         /* SEÇÃO DE CURSOS */
         .courses-section {
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            margin-bottom: 40px;
-            border: 1px solid #e9ecef;
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 
+                0 0 30px rgba(255, 0, 128, 0.2),
+                inset 0 0 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 50px;
+            border: 2px solid #ff0080;
+            backdrop-filter: blur(10px);
         }
 
         .courses-section h3 {
-            font-size: 20px;
-            color: #212529;
-            margin-bottom: 25px;
+            font-size: 24px;
+            color: #ff0080;
+            margin-bottom: 30px;
             text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .courses-section h3 i {
+            color: #8000ff;
+            margin-right: 15px;
         }
 
         .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .course-card {
-            background-color: #f8f9fa;
-            border-radius: 6px;
-            padding: 20px;
-            border-left: 4px solid #0056a6;
-            transition: transform 0.3s ease;
+            background: linear-gradient(135deg, rgba(0, 128, 255, 0.1) 0%, rgba(0, 255, 234, 0.1) 100%);
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 6px solid #0080ff;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #0080ff, #00ffea);
         }
 
         .course-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 128, 255, 0.4);
+            border-left-color: #00ffea;
         }
 
         .course-card h4 {
-            font-size: 16px;
-            color: #0056a6;
-            margin-bottom: 10px;
+            font-size: 18px;
+            color: #00ffea;
+            margin-bottom: 15px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
         }
 
         .course-card p {
-            font-size: 14px;
-            color: #6c757d;
-            margin-bottom: 15px;
+            font-size: 15px;
+            color: #a0a0ff;
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
 
         .course-link {
             display: inline-block;
-            color: #0056a6;
-            font-weight: 600;
-            font-size: 13px;
+            color: #ff0080;
+            font-weight: 700;
+            font-size: 14px;
             text-decoration: none;
+            position: relative;
+            padding-right: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .course-link::after {
+            content: '→';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
         }
 
         .course-link:hover {
-            text-decoration: underline;
+            color: #8000ff;
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+        }
+
+        .course-link:hover::after {
+            transform: translateY(-50%) translateX(5px);
         }
 
         /* RESULTADO DA CONSULTA */
         .result-section {
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            margin-bottom: 40px;
-            border: 1px solid #0056a6;
+            background: rgba(20, 20, 40, 0.9);
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 
+                0 0 40px rgba(0, 255, 234, 0.3),
+                0 0 80px rgba(255, 0, 128, 0.2),
+                inset 0 0 30px rgba(0, 0, 0, 0.4);
+            margin-bottom: 50px;
+            border: 2px solid #00ffea;
             display: none;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
 
         .result-section.active {
             display: block;
-            animation: fadeIn 0.5s ease;
+            animation: slideUp 0.5s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.95); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
+        }
+
+        .result-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                #ff0080, #8000ff, #0080ff, #00ffea, #ff0080);
+            animation: rainbow 3s linear infinite;
+            background-size: 400% 100%;
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
         }
 
         .result-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e9ecef;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(128, 0, 255, 0.5);
         }
 
         .result-header h3 {
-            font-size: 22px;
-            color: #0056a6;
-            font-weight: 700;
+            font-size: 26px;
+            color: #00ffea;
+            font-weight: 900;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(0, 255, 234, 0.5);
+        }
+
+        .result-header h3 i {
+            color: #ff0080;
+            margin-right: 15px;
         }
 
         .result-actions {
             display: flex;
-            gap: 10px;
+            gap: 15px;
         }
 
         .vehicle-details {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 35px;
         }
 
         .detail-item {
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 6px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(128, 0, 255, 0.1) 0%, rgba(0, 128, 255, 0.1) 100%);
+            border-radius: 10px;
+            border: 1px solid rgba(128, 0, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff0080, #8000ff, #0080ff);
+        }
+
+        .detail-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(128, 0, 255, 0.3);
+            border-color: #8000ff;
         }
 
         .detail-label {
             font-size: 12px;
-            color: #6c757d;
+            color: #a0a0ff;
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .detail-value {
-            font-size: 16px;
-            color: #212529;
-            font-weight: 600;
+            font-size: 18px;
+            color: #00ffea;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(0, 255, 234, 0.3);
         }
 
         .price-container {
-            background-color: #e8f4fd;
-            border: 2px solid #0056a6;
-            border-radius: 8px;
-            padding: 30px;
+            background: linear-gradient(135deg, rgba(0, 128, 255, 0.2) 0%, rgba(0, 255, 234, 0.2) 100%);
+            border: 3px solid #00ffea;
+            border-radius: 12px;
+            padding: 40px;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 255, 234, 0.3);
+        }
+
+        .price-container::before {
+            content: '💰';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            opacity: 0.2;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .price-label {
-            font-size: 16px;
-            color: #495057;
-            margin-bottom: 10px;
+            font-size: 20px;
+            color: #a0a0ff;
+            margin-bottom: 15px;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .price-value {
-            font-size: 36px;
-            font-weight: 800;
-            color: #0056a6;
+            font-size: 48px;
+            font-weight: 900;
+            color: #00ffea;
             line-height: 1.2;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0, 255, 234, 0.7);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
         }
 
         .price-period {
-            font-size: 14px;
-            color: #6c757d;
+            font-size: 16px;
+            color: #ff0080;
             font-style: italic;
+            text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
+            font-family: 'Exo 2', sans-serif;
         }
 
-        /* FOOTER */
+        /* FOOTER - ESTILO GAMER */
         #main-footer {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            padding: 40px 0 20px;
-            border-top: 4px solid #0056a6;
+            background: rgba(10, 10, 26, 0.95);
+            color: #a0a0ff;
+            padding: 50px 0 30px;
+            border-top: 3px solid #8000ff;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        #main-footer::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                #ff0080, #8000ff, #0080ff, #00ffea, #ff0080);
+            animation: footer-glow 4s linear infinite;
+        }
+
+        @keyframes footer-glow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 40px;
         }
 
         .footer-section h4 {
-            font-size: 16px;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #4a6572;
+            font-size: 18px;
+            font-weight: 900;
+            color: #00ffea;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ff0080;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
         }
 
         .footer-section p {
-            font-size: 14px;
+            font-size: 15px;
             line-height: 1.6;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            color: #a0a0ff;
         }
 
         .footer-links {
@@ -532,30 +983,58 @@
         }
 
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .footer-links li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #ff0080;
+            font-size: 14px;
         }
 
         .footer-links a {
-            color: #bdc3c7;
+            color: #a0a0ff;
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 5px 0;
         }
 
         .footer-links a:hover {
-            color: white;
-            text-decoration: underline;
+            color: #00ffea;
+            transform: translateX(10px);
+            text-shadow: 0 0 10px rgba(0, 255, 234, 0.5);
+        }
+
+        .footer-links a i {
+            color: #8000ff;
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #4a6572;
-            font-size: 13px;
-            color: #95a5a6;
+            padding-top: 30px;
+            border-top: 1px solid rgba(128, 0, 255, 0.3);
+            font-size: 14px;
+            color: #8080cc;
         }
 
-        /* MODAL DE COMPARTILHAR */
+        .footer-bottom p:first-child {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #00ffea;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+        }
+
+        /* MODAL DE COMPARTILHAR - ESTILO GAMER */
         .share-modal {
             display: none;
             position: fixed;
@@ -563,113 +1042,193 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(10, 10, 26, 0.95);
             z-index: 1000;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(10px);
         }
 
         .share-modal.active {
             display: flex;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .share-content {
-            background-color: white;
-            border-radius: 8px;
-            padding: 30px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 15px;
+            padding: 40px;
             width: 90%;
-            max-width: 500px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 550px;
+            box-shadow: 
+                0 0 50px rgba(0, 255, 234, 0.3),
+                0 0 100px rgba(255, 0, 128, 0.2);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+
+        .share-content::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #ff0080, #8000ff, #0080ff, #00ffea);
+            border-radius: 18px;
+            z-index: -1;
+            animation: modal-border 4s linear infinite;
+            background-size: 400% 400%;
+        }
+
+        @keyframes modal-border {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .share-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(128, 0, 255, 0.5);
         }
 
         .share-header h3 {
-            font-size: 20px;
-            color: #0056a6;
+            font-size: 24px;
+            color: #00ffea;
             margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .share-header h3 i {
+            color: #ff0080;
+            margin-right: 15px;
         }
 
         .close-modal {
             background: none;
             border: none;
-            font-size: 24px;
-            color: #6c757d;
+            font-size: 28px;
+            color: #ff0080;
             cursor: pointer;
             padding: 0;
             line-height: 1;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #00ffea;
+            transform: rotate(90deg);
         }
 
         .share-options {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
         .share-option {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 15px;
-            border: 1px solid #e9ecef;
-            border-radius: 6px;
+            padding: 25px;
+            border: 2px solid #8000ff;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
+            background: rgba(128, 0, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .share-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
+            transform: translateX(-100%);
+        }
+
+        .share-option:hover::before {
+            animation: option-shine 0.5s ease;
+        }
+
+        @keyframes option-shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .share-option:hover {
-            background-color: #f8f9fa;
-            border-color: #0056a6;
+            background: rgba(128, 0, 255, 0.2);
+            border-color: #00ffea;
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 234, 0.3);
         }
 
         .share-option i {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #0056a6;
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #00ffea;
         }
 
         .share-option span {
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
+            color: #e0e0ff;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .share-link {
             display: flex;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .share-link input {
             flex: 1;
-            padding: 10px 15px;
-            border: 1px solid #ced4da;
-            border-radius: 6px 0 0 6px;
-            font-size: 14px;
+            padding: 15px 20px;
+            border: 2px solid #8000ff;
+            border-radius: 8px 0 0 8px;
+            font-size: 15px;
+            background: rgba(10, 10, 26, 0.7);
+            color: #e0e0ff;
+            font-family: 'Exo 2', sans-serif;
         }
 
         .share-link button {
-            padding: 10px 20px;
-            background-color: #0056a6;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #ff0080 0%, #8000ff 100%);
             color: white;
             border: none;
-            border-radius: 0 6px 6px 0;
+            border-radius: 0 8px 8px 0;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
         }
 
         .share-link button:hover {
-            background-color: #004a8f;
+            background: linear-gradient(135deg, #8000ff 0%, #ff0080 100%);
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
         }
 
-        /* ESTILOS PARA IMPRESSÃO */
+        /* ESTILOS PARA IMPRESSÃO - TEMA GAMER */
         @media print {
             /* Esconder elementos não necessários na impressão */
             #main-header,
@@ -685,11 +1244,13 @@
             /* Exibir apenas o resultado */
             .result-section {
                 display: block !important;
-                border: 2px solid #000;
-                box-shadow: none;
-                margin: 0;
-                padding: 20px;
+                border: 3px solid #0080ff !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 30px !important;
                 page-break-inside: avoid;
+                background: white !important;
+                color: #0a0a1a !important;
             }
             
             /* Layout específico para impressão */
@@ -699,66 +1260,73 @@
             
             .print-header {
                 text-align: center;
-                margin-bottom: 30px;
-                padding-bottom: 20px;
-                border-bottom: 3px solid #0056a6;
+                margin-bottom: 40px;
+                padding-bottom: 25px;
+                border-bottom: 3px solid #0080ff;
             }
             
             .print-header h2 {
-                font-size: 24px;
-                color: #0056a6;
-                margin-bottom: 10px;
+                font-size: 28px;
+                color: #0080ff !important;
+                margin-bottom: 15px;
+                font-family: 'Orbitron', sans-serif !important;
             }
             
             .print-logo {
                 text-align: center;
-                margin-bottom: 20px;
-                font-size: 20px;
+                margin-bottom: 25px;
+                font-size: 24px;
                 font-weight: bold;
-                color: #0056a6;
+                color: #0080ff !important;
+                font-family: 'Orbitron', sans-serif !important;
             }
             
             .print-details {
-                margin: 30px 0;
+                margin: 40px 0;
             }
             
             .print-detail-row {
                 display: flex;
-                margin-bottom: 15px;
-                padding-bottom: 15px;
-                border-bottom: 1px solid #ddd;
+                margin-bottom: 20px;
+                padding-bottom: 20px;
+                border-bottom: 2px solid #8000ff;
             }
             
             .print-detail-label {
                 font-weight: bold;
-                width: 150px;
-                color: #0056a6;
+                width: 180px;
+                color: #8000ff !important;
+                font-family: 'Rajdhani', sans-serif !important;
             }
             
             .print-detail-value {
                 flex: 1;
+                color: #0a0a1a !important;
+                font-weight: 600;
             }
             
             .print-price {
                 text-align: center;
-                margin: 40px 0;
-                padding: 30px;
-                border: 3px solid #0056a6;
-                border-radius: 8px;
+                margin: 50px 0;
+                padding: 40px;
+                border: 3px solid #0080ff;
+                border-radius: 12px;
+                background: linear-gradient(135deg, rgba(0, 128, 255, 0.1) 0%, rgba(0, 255, 234, 0.1) 100%);
             }
             
             .print-price-value {
-                font-size: 42px;
+                font-size: 48px;
                 font-weight: bold;
-                color: #0056a6;
-                margin: 15px 0;
+                color: #0080ff !important;
+                margin: 20px 0;
+                font-family: 'Orbitron', sans-serif !important;
             }
             
             .print-footer {
-                margin-top: 50px;
-                padding-top: 20px;
-                border-top: 2px solid #ddd;
-                font-size: 12px;
+                margin-top: 60px;
+                padding-top: 25px;
+                border-top: 3px solid #8000ff;
+                font-size: 14px;
                 color: #666;
                 text-align: center;
             }
@@ -766,9 +1334,10 @@
             /* Ajustes gerais para impressão */
             body {
                 background-color: white !important;
-                color: black !important;
+                color: #0a0a1a !important;
                 font-size: 12pt !important;
                 line-height: 1.4 !important;
+                font-family: 'Exo 2', Arial, sans-serif !important;
             }
             
             .container {
@@ -779,7 +1348,21 @@
             }
             
             #main-content {
-                padding: 20px !important;
+                padding: 30px !important;
+            }
+            
+            .detail-item,
+            .price-container {
+                border-color: #8000ff !important;
+                background: white !important;
+            }
+            
+            .detail-label {
+                color: #8000ff !important;
+            }
+            
+            .detail-value {
+                color: #0a0a1a !important;
             }
         }
 
@@ -791,7 +1374,7 @@
             }
             
             .fipe-brand {
-                margin-bottom: 15px;
+                margin-bottom: 20px;
             }
             
             .consultation-sections {
@@ -816,7 +1399,7 @@
             }
             
             .result-header h3 {
-                margin-bottom: 15px;
+                margin-bottom: 20px;
             }
             
             .result-actions {
@@ -826,6 +1409,14 @@
             
             .share-options {
                 grid-template-columns: 1fr;
+            }
+            
+            .page-title h2 {
+                font-size: 28px;
+            }
+            
+            .price-value {
+                font-size: 36px;
             }
         }
 
@@ -850,34 +1441,81 @@
             display: none;
         }
         
-        /* Exemplo pré-carregado */
-        .example-consultation {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 6px;
-            border-left: 4px solid #0056a6;
-        }
-        
-        .example-consultation p {
-            margin-bottom: 10px;
-            font-size: 13px;
-            color: #495057;
-        }
-        
-        .example-btn {
+        /* Efeitos especiais */
+        .glitch {
+            position: relative;
             display: inline-block;
-            padding: 8px 15px;
-            background-color: #6c757d;
-            color: white;
-            border-radius: 4px;
-            font-size: 12px;
-            cursor: pointer;
-            border: none;
         }
         
-        .example-btn:hover {
-            background-color: #5a6268;
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+        
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff0080;
+            animation: glitch-1 2s infinite linear alternate-reverse;
+        }
+        
+        .glitch::after {
+            left: -2px;
+            text-shadow: 2px 0 #00ffea;
+            animation: glitch-2 3s infinite linear alternate-reverse;
+        }
+        
+        @keyframes glitch-1 {
+            0% { clip: rect(20px, 9999px, 21px, 0); }
+            5% { clip: rect(32px, 9999px, 81px, 0); }
+            10% { clip: rect(54px, 9999px, 29px, 0); }
+            15% { clip: rect(12px, 9999px, 45px, 0); }
+            20% { clip: rect(67px, 9999px, 89px, 0); }
+            25% { clip: rect(23px, 9999px, 12px, 0); }
+            30% { clip: rect(78px, 9999px, 34px, 0); }
+            35% { clip: rect(45px, 9999px, 67px, 0); }
+            40% { clip: rect(89px, 9999px, 23px, 0); }
+            45% { clip: rect(34px, 9999px, 78px, 0); }
+            50% { clip: rect(67px, 9999px, 45px, 0); }
+            55% { clip: rect(12px, 9999px, 89px, 0); }
+            60% { clip: rect(78px, 9999px, 34px, 0); }
+            65% { clip: rect(23px, 9999px, 12px, 0); }
+            70% { clip: rect(89px, 9999px, 23px, 0); }
+            75% { clip: rect(34px, 9999px, 78px, 0); }
+            80% { clip: rect(67px, 9999px, 45px, 0); }
+            85% { clip: rect(12px, 9999px, 89px, 0); }
+            90% { clip: rect(78px, 9999px, 34px, 0); }
+            95% { clip: rect(23px, 9999px, 12px, 0); }
+            100% { clip: rect(89px, 9999px, 23px, 0); }
+        }
+        
+        @keyframes glitch-2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            5% { clip: rect(52px, 9999px, 74px, 0); }
+            10% { clip: rect(79px, 9999px, 85px, 0); }
+            15% { clip: rect(25px, 9999px, 40px, 0); }
+            20% { clip: rect(75px, 9999px, 5px, 0); }
+            25% { clip: rect(90px, 9999px, 61px, 0); }
+            30% { clip: rect(1px, 9999px, 83px, 0); }
+            35% { clip: rect(68px, 9999px, 27px, 0); }
+            40% { clip: rect(34px, 9999px, 50px, 0); }
+            45% { clip: rect(59px, 9999px, 97px, 0); }
+            50% { clip: rect(83px, 9999px, 12px, 0); }
+            55% { clip: rect(27px, 9999px, 68px, 0); }
+            60% { clip: rect(50px, 9999px, 34px, 0); }
+            65% { clip: rect(97px, 9999px, 59px, 0); }
+            70% { clip: rect(12px, 9999px, 83px, 0); }
+            75% { clip: rect(68px, 9999px, 27px, 0); }
+            80% { clip: rect(34px, 9999px, 50px, 0); }
+            85% { clip: rect(59px, 9999px, 97px, 0); }
+            90% { clip: rect(83px, 9999px, 12px, 0); }
+            95% { clip: rect(27px, 9999px, 68px, 0); }
+            100% { clip: rect(50px, 9999px, 34px, 0); }
         }
     </style>
 </head>
@@ -891,8 +1529,8 @@
                         <span>FIPE</span>
                     </div>
                     <div class="brand-text">
-                        <h1>Fundação Instituto de Pesquisas Econômicas</h1>
-                        <p>Tabela FIPE - Preço Médio de Veículos</p>
+                        <h1 class="glitch" data-text="FUNDAÇÃO INSTITUTO DE PESQUISAS">FUNDAÇÃO INSTITUTO DE PESQUISAS</h1>
+                        <p>Tabela FIPE - Edição Gamer 🎮</p>
                     </div>
                 </a>
                 <div class="header-date">
@@ -908,51 +1546,50 @@
         <div class="container">
             <!-- TÍTULO PRINCIPAL -->
             <div class="page-title">
-                <h2>Preço Médio de Veículos</h2>
-                <p>Consulte o preço médio de veículos no mercado nacional. A Tabela FIPE expressa preços médios praticados na revenda para o consumidor final.</p>
+                <h2>PREÇO MÉDIO DE GAMES E CONSOLES</h2>
+                <p>Consulte o preço médio de games, consoles e acessórios no mercado nacional. Edição especial com tema gamer!</p>
             </div>
 
-            <!-- CARD DE CONSULTA DE CARROS (ÚNICO) -->
+            <!-- CARD DE CONSULTA ÚNICO -->
             <div class="consultation-card">
                 <div class="card-header">
-                    <h3><i class="fas fa-car"></i> Consulta de Carros e Utilitários Pequenos</h3>
+                    <h3><i class="fas fa-gamepad"></i> Consulta de Games e Consoles</h3>
                     <div class="reference" id="reference-date">Sua pesquisa será realizada de acordo com o seguinte mês e ano de referência: Junho/2024</div>
                 </div>
                 <div class="card-body">
-                    <p class="search-hint mb-20">Informe primeiro a marca do veículo e depois o modelo e o ano modelo na ordem que desejar. Você também pode digitar a informação no campo "busca", dentro de cada opção do formulário da pesquisa.</p>
+                    <p class="search-hint mb-20">🎯 Informe primeiro a plataforma/game e depois o modelo e o ano de lançamento. Você também pode digitar a informação no campo "busca".</p>
                     
                     <div class="form-group">
-                        <label for="car-brand">Marca</label>
+                        <label for="car-brand"><i class="fas fa-tag"></i> Plataforma / Categoria</label>
                         <select class="form-control" id="car-brand">
-                            <option value="">Selecione a marca</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="volkswagen">Volkswagen</option>
-                            <option value="chevrolet">Chevrolet</option>
-                            <option value="ford">Ford</option>
-                            <option value="hyundai">Hyundai</option>
-                            <option value="toyota">Toyota</option>
-                            <option value="honda">Honda</option>
-                            <option value="renault">Renault</option>
-                            <option value="jeep">Jeep</option>
+                            <option value="">Selecione a plataforma</option>
+                            <option value="playstation">PlayStation</option>
+                            <option value="xbox">Xbox</option>
+                            <option value="nintendo">Nintendo</option>
+                            <option value="pc">PC Gaming</option>
+                            <option value="acessorios">Acessórios</option>
+                            <option value="jogos">Jogos Físicos</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label for="car-model">Modelo</label>
+                        <label for="car-model"><i class="fas fa-list"></i> Modelo / Jogo</label>
                         <select class="form-control" id="car-model" disabled>
                             <option value="">Selecione o modelo</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label for="car-year">Ano Modelo</label>
+                        <label for="car-year"><i class="fas fa-calendar"></i> Ano de Lançamento</label>
                         <select class="form-control" id="car-year" disabled>
                             <option value="">Selecione o ano</option>
                         </select>
                     </div>
                     
                     <div class="form-actions">
-                        <button type="button" class="btn btn-primary btn-block" id="btn-consult">Consultar Preço</button>
+                        <button type="button" class="btn btn-primary btn-block" id="btn-consult">
+                            <i class="fas fa-search"></i> Consultar Preço
+                        </button>
                     </div>
                     
                     <div class="alternative-link">
@@ -961,21 +1598,21 @@
                     
                     <!-- Exemplo pré-carregado -->
                     <div class="example-consultation">
-                        <p><strong>Exemplo rápido:</strong> Teste o sistema com um exemplo pré-configurado</p>
+                        <p><strong>🎮 EXEMPLO RÁPIDO:</strong> Teste o sistema com um exemplo pré-configurado de console</p>
                         <button class="example-btn" id="load-example">
-                            <i class="fas fa-bolt"></i> Carregar exemplo (Fiat Argo 2024)
+                            <i class="fas fa-bolt"></i> Carregar exemplo (PlayStation 5 2023)
                         </button>
                     </div>
                     
                     <!-- Formulário alternativo para código FIPE -->
-                    <div id="code-search-form" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e9ecef;">
+                    <div id="code-search-form" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(128, 0, 255, 0.3);">
                         <div class="form-group">
-                            <label for="fipe-code">Código FIPE</label>
-                            <input type="text" class="form-control" id="fipe-code" placeholder="Ex: 001001-1">
+                            <label for="fipe-code"><i class="fas fa-barcode"></i> Código FIPE Gamer</label>
+                            <input type="text" class="form-control" id="fipe-code" placeholder="Ex: GAM001-1">
                         </div>
                         
                         <div class="form-group">
-                            <label for="code-year">Ano Modelo</label>
+                            <label for="code-year"><i class="fas fa-calendar"></i> Ano de Lançamento</label>
                             <select class="form-control" id="code-year">
                                 <option value="">Selecione o ano</option>
                                 <option value="2024">2024</option>
@@ -986,10 +1623,12 @@
                             </select>
                         </div>
                         
-                        <button type="button" class="btn btn-secondary btn-block" id="btn-consult-code">Consultar por Código</button>
+                        <button type="button" class="btn btn-secondary btn-block" id="btn-consult-code">
+                            <i class="fas fa-search"></i> Consultar por Código
+                        </button>
                         
                         <div class="alternative-link">
-                            <a href="#" id="toggle-normal-search"><i class="fas fa-car"></i> Voltar para consulta por marca/modelo</a>
+                            <a href="#" id="toggle-normal-search"><i class="fas fa-gamepad"></i> Voltar para consulta normal</a>
                         </div>
                     </div>
                 </div>
@@ -997,50 +1636,50 @@
 
             <!-- SEÇÃO DE INFORMAÇÕES -->
             <div class="info-section">
-                <h3><i class="fas fa-info-circle"></i> Informações Importantes</h3>
+                <h3><i class="fas fa-info-circle"></i> INFORMAÇÕES IMPORTANTES</h3>
                 
                 <div class="info-points">
                     <div class="info-point">
-                        <p>A Tabela FIPE expressa preços médios para pagamento à vista, praticados na revenda de veículos para o consumidor final, pessoa física, no mercado nacional, servindo apenas como um parâmetro para negociações ou avaliações.</p>
+                        <p>A Tabela FIPE Gamer expressa preços médios praticados na revenda de games, consoles e acessórios para o consumidor final, servindo apenas como um parâmetro para negociações ou avaliações.</p>
                     </div>
                     <div class="info-point">
-                        <p>Os preços efetivamente praticados variam em função da região, conservação, cor, acessórios ou qualquer outro fator que possa influenciar as condições de oferta e procura por um veículo específico.</p>
+                        <p>Os preços efetivamente praticados variam em função da região, conservação, edição limitada, conteúdo digital ou qualquer outro fator que possa influenciar as condições de oferta e procura.</p>
                     </div>
                     <div class="info-point">
-                        <p>O ano do veículo refere-se ao ano do modelo e não são considerados veículos para uso profissional ou especial.</p>
+                        <p>O ano refere-se ao ano de lançamento e não são considerados produtos para uso profissional ou colecionador.</p>
                     </div>
                     <div class="info-point">
-                        <p>Os valores são expressos em R$ (reais) do mês/ano de referência.</p>
+                        <p>Os valores são expressos em R$ (reais) do mês/ano de referência e incluem apenas produtos originais.</p>
                     </div>
                 </div>
                 
                 <div class="warning-box">
-                    <h4><i class="fas fa-exclamation-triangle"></i> Comunicado importante</h4>
-                    <p>A Tabela FIPE disponibiliza oficialmente e exclusivamente através deste canal consulta pública ao preço médio de veículos, sendo necessário consultar modelo a modelo desejado.</p>
-                    <p class="mb-0">NÃO disponibilizamos download de qualquer tipo de arquivo, contendo a base completa ou parcial. NÃO disponibilizamos serviço de API.</p>
+                    <h4><i class="fas fa-exclamation-triangle"></i> COMUNICADO IMPORTANTE</h4>
+                    <p>A Tabela FIPE Gamer disponibiliza oficialmente e exclusivamente através deste canal consulta pública ao preço médio de produtos gamers.</p>
+                    <p class="mb-0">🎯 NÃO disponibilizamos download de qualquer tipo de arquivo, contendo a base completa ou parcial. NÃO disponibilizamos serviço de API.</p>
                 </div>
             </div>
 
             <!-- SEÇÃO DE CURSOS -->
             <div class="courses-section">
-                <h3><i class="fas fa-graduation-cap"></i> Cursos FIPE</h3>
+                <h3><i class="fas fa-graduation-cap"></i> CURSOS FIPE - EDIÇÃO GAMER</h3>
                 
                 <div class="courses-grid">
                     <div class="course-card">
-                        <h4>MBA Gestão Estratégica de Negócios e Economia Empresarial</h4>
-                        <p>Programa de pós-graduação com foco em estratégia empresarial e economia aplicada aos negócios.</p>
+                        <h4>MBA Gestão de E-Sports e Negócios Digitais</h4>
+                        <p>Programa de pós-graduação com foco em gestão de equipes de e-sports, streaming e negócios digitais no mundo gamer.</p>
                         <a href="#" class="course-link">Saiba Mais</a>
                     </div>
                     
                     <div class="course-card">
-                        <h4>Cursos EAD FIPE</h4>
-                        <p>Diversos temas das áreas de Economia, Finanças e Negócios são abordados nos programas EaD FIPE.</p>
+                        <h4>Desenvolvimento de Games e Realidade Virtual</h4>
+                        <p>Aprenda a desenvolver games, engines gráficas e experiências em realidade virtual e aumentada.</p>
                         <a href="#" class="course-link">Saiba Mais</a>
                     </div>
                     
                     <div class="course-card">
-                        <h4>MBA Economia, Setor Financeiro e Finanças Empresariais</h4>
-                        <p>Especialização avançada em economia financeira e gestão de recursos empresariais.</p>
+                        <h4>Economia do Mercado Gamer e Criptomoedas</h4>
+                        <p>Especialização em economia aplicada ao mercado de games, NFTs, criptomoedas e ativos digitais.</p>
                         <a href="#" class="course-link">Saiba Mais</a>
                     </div>
                 </div>
@@ -1051,8 +1690,8 @@
                 <!-- Conteúdo para impressão (visível apenas na impressão) -->
                 <div class="print-only">
                     <div class="print-header">
-                        <div class="print-logo">FIPE - Fundação Instituto de Pesquisas Econômicas</div>
-                        <h2>Consulta Tabela FIPE - Resultado Oficial</h2>
+                        <div class="print-logo">FIPE GAMER - Edição Especial</div>
+                        <h2>Consulta Tabela FIPE Gamer - Resultado Oficial</h2>
                         <p>Documento gerado em: <span id="print-date"></span></p>
                     </div>
                     
@@ -1066,15 +1705,15 @@
                             <div class="print-detail-value" id="print-code"></div>
                         </div>
                         <div class="print-detail-row">
-                            <div class="print-detail-label">Marca:</div>
+                            <div class="print-detail-label">Plataforma:</div>
                             <div class="print-detail-value" id="print-brand"></div>
                         </div>
                         <div class="print-detail-row">
-                            <div class="print-detail-label">Modelo:</div>
+                            <div class="print-detail-label">Modelo/Jogo:</div>
                             <div class="print-detail-value" id="print-model"></div>
                         </div>
                         <div class="print-detail-row">
-                            <div class="print-detail-label">Ano Modelo:</div>
+                            <div class="print-detail-label">Ano Lançamento:</div>
                             <div class="print-detail-value" id="print-year"></div>
                         </div>
                         <div class="print-detail-row">
@@ -1084,21 +1723,21 @@
                     </div>
                     
                     <div class="print-price">
-                        <div class="price-label">Preço Médio do Veículo</div>
+                        <div class="price-label">Preço Médio do Produto</div>
                         <div class="print-price-value" id="print-price"></div>
                         <div class="price-period">Mês de referência: <span id="print-ref-month2"></span></div>
                     </div>
                     
                     <div class="print-footer">
-                        <p>Este documento foi gerado a partir da consulta oficial à Tabela FIPE.</p>
-                        <p>Para verificar a autenticidade desta consulta, acesse: https://veiculos.fipe.org.br</p>
+                        <p>🎮 Este documento foi gerado a partir da consulta oficial à Tabela FIPE Gamer.</p>
+                        <p>Para verificar a autenticidade desta consulta, acesse: https://fipe-gamer.org.br</p>
                         <p>Documento válido apenas para fins de referência e negociação.</p>
                     </div>
                 </div>
                 
                 <!-- Conteúdo normal (visível na tela) -->
                 <div class="result-header">
-                    <h3><i class="fas fa-search"></i> Resultado da Consulta</h3>
+                    <h3><i class="fas fa-trophy"></i> RESULTADO DA CONSULTA</h3>
                     <div class="result-actions">
                         <button class="btn btn-primary" id="btn-print">
                             <i class="fas fa-print"></i> Imprimir
@@ -1116,28 +1755,28 @@
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">Código FIPE</div>
-                        <div class="detail-value" id="result-code">001234-5</div>
+                        <div class="detail-value" id="result-code">GAM001-1</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Marca</div>
+                        <div class="detail-label">Plataforma</div>
                         <div class="detail-value" id="result-brand">-</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Modelo</div>
+                        <div class="detail-label">Modelo/Jogo</div>
                         <div class="detail-value" id="result-model">-</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Ano Modelo</div>
+                        <div class="detail-label">Ano Lançamento</div>
                         <div class="detail-value" id="result-year">-</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">Autenticação</div>
-                        <div class="detail-value" id="result-auth">CONSULTA VÁLIDA</div>
+                        <div class="detail-label">Status</div>
+                        <div class="detail-value" id="result-auth">CONSULTA VÁLIDA 🎯</div>
                     </div>
                 </div>
                 
                 <div class="price-container">
-                    <div class="price-label">Preço Médio</div>
+                    <div class="price-label">PREÇO MÉDIO</div>
                     <div class="price-value" id="result-price">R$ 0,00</div>
                     <div class="price-period" id="result-period">Data da consulta: -</div>
                 </div>
@@ -1152,17 +1791,17 @@
                 <div class="footer-section">
                     <h4>Entre em contato</h4>
                     <p>Entre em contato conosco pelo e-mail:</p>
-                    <p><strong>veiculos@fipe.org.br</strong></p>
-                    <p class="mt-20">Para ter certeza que está navegando no site da Fipe basta verificar o endereço de URL que deve ser <strong>www.fipe.org.br</strong> ou <strong>veiculos.fipe.org.br</strong>.</p>
+                    <p><strong>gamer@fipe.org.br</strong></p>
+                    <p class="mt-20">🎮 Para ter certeza que está navegando no site da FIPE Gamer basta verificar o endereço de URL.</p>
                 </div>
                 
                 <div class="footer-section">
                     <h4>Links Úteis</h4>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-download"></i> Download do App Oficial</a></li>
-                        <li><a href="#"><i class="fas fa-question-circle"></i> Perguntas Frequentes</a></li>
-                        <li><a href="#"><i class="fas fa-book"></i> Publicações FIPE</a></li>
-                        <li><a href="#"><i class="fas fa-chart-line"></i> Indicadores Econômicos</a></li>
+                        <li><a href="#"><i class="fas fa-download"></i> App Oficial FIPE Gamer</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> FAQ - Perguntas Frequentes</a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> Mercado de Games no Brasil</a></li>
+                        <li><a href="#"><i class="fas fa-trophy"></i> Ranking de Preços</a></li>
                     </ul>
                 </div>
                 
@@ -1175,8 +1814,8 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 Fundação Instituto de Pesquisas Econômicas - FIPE. Todos os direitos reservados.</p>
-                <p>Esta é uma réplica para fins de estudo. Site oficial disponível em: <a href="https://veiculos.fipe.org.br" style="color: #95a5a6;">veiculos.fipe.org.br</a></p>
+                <p>🎮 FIPE GAMER EDITION - 2024</p>
+                <p>Esta é uma edição especial com tema gamer para fins de estudo. Site oficial disponível em: <a href="https://veiculos.fipe.org.br" style="color: #a0a0ff;">veiculos.fipe.org.br</a></p>
             </div>
         </div>
     </footer>
@@ -1189,7 +1828,7 @@
                 <button class="close-modal" id="close-share-modal">&times;</button>
             </div>
             
-            <p>Compartilhe esta consulta da Tabela FIPE:</p>
+            <p style="color: #a0a0ff; margin-bottom: 20px;">Compartilhe esta consulta da Tabela FIPE Gamer:</p>
             
             <div class="share-options">
                 <div class="share-option" id="share-whatsapp">
@@ -1214,63 +1853,48 @@
             </div>
             
             <div class="share-link">
-                <input type="text" id="share-url" readonly value="https://veiculos.fipe.org.br/consulta">
-                <button id="copy-link"><i class="fas fa-copy"></i> Copiar</button>
+                <input type="text" id="share-url" readonly value="https://fipe-gamer.org.br/consulta">
+                <button id="copy-link"><i class="fas fa-copy"></i> Copiar Link</button>
             </div>
             
-            <div style="margin-top: 15px; font-size: 12px; color: #6c757d;">
+            <div style="margin-top: 15px; font-size: 13px; color: #a0a0ff;">
                 <p><i class="fas fa-info-circle"></i> O link contém os dados da consulta atual para compartilhamento.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // Dados simulados para as consultas
-        const vehicleData = {
-            fiat: {
-                modelos: ["Argo Drive 1.0", "Mobi Like 1.0", "Cronos Drive 1.3", "Strada Volcye 1.3", "Toro Freedom 1.8"],
+        // Dados simulados para a versão GAMER
+        const gamerData = {
+            playstation: {
+                modelos: ["PlayStation 5 Standard", "PlayStation 5 Digital", "PlayStation 4 Pro", "PlayStation 4 Slim", "PS Vita"],
                 anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 72990
+                precoBase: 4299
             },
-            volkswagen: {
-                modelos: ["Polo 1.0 MSI", "Virtus 1.0 TSI", "T-Cross 1.0 TSI", "Gol 1.0 MSI", "Nivus 1.0 TSI"],
+            xbox: {
+                modelos: ["Xbox Series X", "Xbox Series S", "Xbox One X", "Xbox One S", "Xbox 360"],
                 anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 89990
+                precoBase: 3899
             },
-            chevrolet: {
-                modelos: ["Onix 1.0 MT", "Onix Plus 1.0 Turbo", "Tracker 1.2 Turbo", "Spin 1.8", "Cruze 1.4 Turbo"],
+            nintendo: {
+                modelos: ["Nintendo Switch OLED", "Nintendo Switch", "Nintendo Switch Lite", "Nintendo 3DS", "Wii U"],
                 anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 78990
+                precoBase: 2299
             },
-            ford: {
-                modelos: ["Ka 1.0 SE", "EcoSport 1.5 SE", "Ranger 2.2 XL", "Territory 1.5 Turbo", "Mustang 5.0 V8"],
+            pc: {
+                modelos: ["PC Gamer RTX 4080", "PC Gamer RTX 4070", "PC Gamer RTX 4060", "PC Gamer RX 7800", "Notebook Gamer"],
                 anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 69990
+                precoBase: 8999
             },
-            hyundai: {
-                modelos: ["HB20 1.0 Comfort", "Creta 1.6 Comfort", "Tucson 2.0 GL", "HB20S 1.0 Turbo", "Santa Fe 3.5 V6"],
+            acessorios: {
+                modelos: ["Controle DualSense PS5", "Controle Xbox Elite", "Headset Gamer 7.1", "Teclado Mecânico RGB", "Mouse Gamer"],
                 anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 76990
+                precoBase: 599
             },
-            toyota: {
-                modelos: ["Corolla 2.0 XEi", "Hilux 2.8 SRX", "SW4 4x4 Diesel", "Yaris 1.5 XS", "RAV4 2.5 Hybrid"],
+            jogos: {
+                modelos: ["God of War Ragnarök", "The Legend of Zelda", "Halo Infinite", "Elden Ring", "Cyberpunk 2077"],
                 anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 149990
-            },
-            honda: {
-                modelos: ["Civic 2.0 Touring", "HR-V 1.5 Turbo", "WR-V 1.5 Flex", "City 1.5 LX", "Accord 2.0 Turbo"],
-                anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 169990
-            },
-            renault: {
-                modelos: ["Kwid 1.0 Life", "Duster 1.6 Zen", "Captur 1.6 Intense", "Sandero 1.0 Life", "Logan 1.0 Life"],
-                anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 61990
-            },
-            jeep: {
-                modelos: ["Renegade 1.8 Sport", "Compass 2.0 Limited", "Wrangler 3.6 Rubicon", "Grand Cherokee 3.6"],
-                anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 110000
+                precoBase: 299
             }
         };
 
@@ -1326,72 +1950,69 @@
                 const codeYear = document.getElementById('code-year').value;
                 
                 if (!fipeCode || !codeYear) {
-                    alert('Por favor, informe o código FIPE e o ano modelo.');
+                    alert('🎯 Por favor, informe o código FIPE e o ano de lançamento.');
                     return;
                 }
                 
                 // Simular consulta por código
-                const randomBrand = Object.keys(vehicleData)[Math.floor(Math.random() * Object.keys(vehicleData).length)];
+                const randomBrand = Object.keys(gamerData)[Math.floor(Math.random() * Object.keys(gamerData).length)];
                 const brandName = document.querySelector(`#car-brand option[value="${randomBrand}"]`).textContent;
-                const modelName = vehicleData[randomBrand].modelos[Math.floor(Math.random() * vehicleData[randomBrand].modelos.length)];
+                const modelName = gamerData[randomBrand].modelos[Math.floor(Math.random() * gamerData[randomBrand].modelos.length)];
                 
-                const basePrice = vehicleData[randomBrand].precoBase;
+                const basePrice = gamerData[randomBrand].precoBase;
                 const yearDiff = 2024 - parseInt(codeYear);
-                const priceMultiplier = 1 - (yearDiff * 0.1);
-                const adjustedPrice = Math.round(basePrice * priceMultiplier / 1000) * 1000;
+                const priceMultiplier = 1 - (yearDiff * 0.15);
+                const adjustedPrice = Math.round(basePrice * priceMultiplier / 100) * 100;
                 
-                // CHAMADA CORRIGIDA: Passar o preço ajustado, não o basePrice
                 showResult(brandName, modelName, codeYear, adjustedPrice, fipeCode);
             });
             
             // Configurar exemplo pré-carregado
             document.getElementById('load-example').addEventListener('click', function() {
                 // Preencher formulário com exemplo
-                document.getElementById('car-brand').value = 'fiat';
+                document.getElementById('car-brand').value = 'playstation';
                 
                 // Habilitar e preencher modelo
                 document.getElementById('car-model').disabled = false;
                 const modelSelect = document.getElementById('car-model');
                 modelSelect.innerHTML = '<option value="">Selecione o modelo</option>';
-                vehicleData.fiat.modelos.forEach(modelo => {
+                gamerData.playstation.modelos.forEach(modelo => {
                     const option = document.createElement('option');
                     option.value = modelo.toLowerCase().replace(/\s+/g, '-');
                     option.textContent = modelo;
                     modelSelect.appendChild(option);
                 });
-                modelSelect.value = 'argo-drive-1.0';
+                modelSelect.value = 'playstation-5-standard';
                 
                 // Habilitar e preencher ano
                 document.getElementById('car-year').disabled = false;
                 const yearSelect = document.getElementById('car-year');
                 yearSelect.innerHTML = '<option value="">Selecione o ano</option>';
-                vehicleData.fiat.anos.forEach(ano => {
+                gamerData.playstation.anos.forEach(ano => {
                     const option = document.createElement('option');
                     option.value = ano;
                     option.textContent = ano;
                     yearSelect.appendChild(option);
                 });
-                yearSelect.value = '2024';
+                yearSelect.value = '2023';
                 
                 // Executar consulta automaticamente
-                const brand = 'Fiat';
-                const model = 'Argo Drive 1.0';
-                const year = '2024';
-                const basePrice = vehicleData.fiat.precoBase;
-                const fipeCode = generateFipeCode('fiat', year);
+                const brand = 'PlayStation';
+                const model = 'PlayStation 5 Standard';
+                const year = '2023';
+                const basePrice = gamerData.playstation.precoBase;
+                const yearDiff = 2024 - parseInt(year);
+                const priceMultiplier = 1 - (yearDiff * 0.15);
+                const adjustedPrice = Math.round(basePrice * priceMultiplier / 100) * 100;
+                const fipeCode = generateFipeCode('playstation', year);
                 
-                showResult(brand, model, year, basePrice, fipeCode);
+                showResult(brand, model, year, adjustedPrice, fipeCode);
             });
-            
-            // Carregar um exemplo inicial automaticamente para testes
-            setTimeout(() => {
-                //document.getElementById('load-example').click();
-            }, 500);
         });
 
         // Configurar eventos dos formulários
         function setupFormEvents() {
-            // Formulário de carros
+            // Formulário principal
             const carBrand = document.getElementById('car-brand');
             const carModel = document.getElementById('car-model');
             const carYear = document.getElementById('car-year');
@@ -1400,7 +2021,7 @@
             carBrand.addEventListener('change', function() {
                 if (this.value) {
                     carModel.disabled = false;
-                    populateModelSelect(carModel, vehicleData[this.value].modelos);
+                    populateModelSelect(carModel, gamerData[this.value].modelos);
                 } else {
                     carModel.disabled = true;
                     carYear.disabled = true;
@@ -1412,7 +2033,7 @@
             carModel.addEventListener('change', function() {
                 if (this.value && carBrand.value) {
                     carYear.disabled = false;
-                    populateYearSelect(carYear, vehicleData[carBrand.value].anos);
+                    populateYearSelect(carYear, gamerData[carBrand.value].anos);
                 } else {
                     carYear.disabled = true;
                     carYear.innerHTML = '<option value="">Selecione o ano</option>';
@@ -1424,20 +2045,20 @@
                     const brand = carBrand.options[carBrand.selectedIndex].text;
                     const model = carModel.options[carModel.selectedIndex].text;
                     const year = carYear.value;
-                    const basePrice = vehicleData[carBrand.value].precoBase;
+                    const basePrice = gamerData[carBrand.value].precoBase;
                     
                     // Calcular preço ajustado
                     const yearDiff = 2024 - parseInt(year);
-                    const priceMultiplier = 1 - (yearDiff * 0.1);
-                    const adjustedPrice = Math.round(basePrice * priceMultiplier / 1000) * 1000;
+                    const priceMultiplier = 1 - (yearDiff * 0.15);
+                    const adjustedPrice = Math.round(basePrice * priceMultiplier / 100) * 100;
                     
                     // Gerar código FIPE aleatório
                     const fipeCode = generateFipeCode(carBrand.value, year);
                     
-                    // CHAMADA CORRIGIDA: Passar o preço ajustado
+                    // Mostrar resultado
                     showResult(brand, model, year, adjustedPrice, fipeCode);
                 } else {
-                    alert('Por favor, selecione a marca, modelo e ano do veículo.');
+                    alert('🎯 Por favor, selecione a plataforma, modelo e ano de lançamento.');
                 }
             });
         }
@@ -1466,28 +2087,25 @@
             });
         }
 
-        // Gerar código FIPE
+        // Gerar código FIPE Gamer
         function generateFipeCode(brand, year) {
             const brandCodes = {
-                fiat: '001',
-                volkswagen: '002', 
-                chevrolet: '003',
-                ford: '004',
-                hyundai: '005',
-                toyota: '006',
-                honda: '007',
-                renault: '008',
-                jeep: '009'
+                playstation: 'PS',
+                xbox: 'XB', 
+                nintendo: 'NT',
+                pc: 'PC',
+                acessorios: 'AC',
+                jogos: 'JG'
             };
             
-            const brandCode = brandCodes[brand] || '010';
-            const randomNum = Math.floor(100 + Math.random() * 900);
-            const version = year === '2024' ? '1' : '0';
+            const brandCode = brandCodes[brand] || 'GM';
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            const version = year === '2024' ? '24' : '23';
             
             return `${brandCode}${randomNum}-${version}`;
         }
 
-        // Mostrar resultado da consulta - FUNÇÃO PRINCIPAL CORRIGIDA
+        // Mostrar resultado da consulta
         function showResult(brand, model, year, price, fipeCode) {
             const currentDate = new Date();
             const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
@@ -1517,19 +2135,19 @@
             document.getElementById('print-date').textContent = formattedDate;
             document.getElementById('print-ref-month').textContent = `${currentMonth}/${currentYear}`;
             document.getElementById('print-ref-month2').textContent = `${currentMonth}/${currentYear}`;
-            document.getElementById('print-auth').textContent = 'CONSULTA VÁLIDA - DOCUMENTO OFICIAL';
+            document.getElementById('print-auth').textContent = 'CONSULTA VÁLIDA - DOCUMENTO OFICIAL 🎮';
             
-            // Armazenar dados da consulta atual - CORREÇÃO AQUI
+            // Armazenar dados da consulta atual
             currentConsultation = {
                 brand: brand,
                 model: model,
                 year: year,
                 price: numericPrice,
                 code: fipeCode,
-                type: 'Carro',
+                type: 'Gamer',
                 date: formattedDate,
                 reference: `${currentMonth}/${currentYear}`,
-                shareText: `Consulta Tabela FIPE: ${brand} ${model} ${year} - Preço: R$ ${numericPrice.toLocaleString('pt-BR')} - Código: ${fipeCode}`
+                shareText: `🎮 Consulta FIPE Gamer: ${brand} ${model} ${year} - Preço: R$ ${numericPrice.toLocaleString('pt-BR')} - Código: ${fipeCode}`
             };
             
             // Atualizar URL de compartilhamento
@@ -1541,6 +2159,13 @@
             
             // Scroll para o resultado
             resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Efeito sonoro simulado (apenas visual)
+            const resultHeader = document.querySelector('.result-header h3');
+            resultHeader.style.animation = 'none';
+            setTimeout(() => {
+                resultHeader.style.animation = 'pulse 0.5s ease';
+            }, 10);
         }
 
         // Configurar modal de compartilhamento
@@ -1565,20 +2190,19 @@
             copyLinkBtn.addEventListener('click', function() {
                 const shareUrl = document.getElementById('share-url');
                 shareUrl.select();
-                shareUrl.setSelectionRange(0, 99999); // Para dispositivos móveis
+                shareUrl.setSelectionRange(0, 99999);
                 
                 try {
                     navigator.clipboard.writeText(shareUrl.value);
                     copyLinkBtn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
                     setTimeout(() => {
-                        copyLinkBtn.innerHTML = '<i class="fas fa-copy"></i> Copiar';
+                        copyLinkBtn.innerHTML = '<i class="fas fa-copy"></i> Copiar Link';
                     }, 2000);
                 } catch (err) {
-                    // Fallback para navegadores mais antigos
                     document.execCommand('copy');
                     copyLinkBtn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
                     setTimeout(() => {
-                        copyLinkBtn.innerHTML = '<i class="fas fa-copy"></i> Copiar';
+                        copyLinkBtn.innerHTML = '<i class="fas fa-copy"></i> Copiar Link';
                     }, 2000);
                 }
             });
@@ -1604,7 +2228,7 @@
         // Abrir modal de compartilhamento
         function openShareModal() {
             if (!currentConsultation) {
-                alert('Realize uma consulta primeiro para compartilhar.');
+                alert('🎮 Realize uma consulta primeiro para compartilhar.');
                 return;
             }
             
@@ -1633,7 +2257,7 @@
         function shareViaWhatsApp() {
             if (!currentConsultation) return;
             
-            const text = `Consulta Tabela FIPE\n\nVeículo: ${currentConsultation.brand} ${currentConsultation.model} ${currentConsultation.year}\nPreço Médio: R$ ${currentConsultation.price.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}\nCódigo FIPE: ${currentConsultation.code}\nMês de Referência: ${currentConsultation.reference}\nData da Consulta: ${currentConsultation.date}\n\nCompartilhado via Tabela FIPE`;
+            const text = `🎮 CONSULTA FIPE GAMER\n\n📱 Plataforma: ${currentConsultation.brand}\n🎯 Modelo: ${currentConsultation.model}\n📅 Ano: ${currentConsultation.year}\n💰 Preço Médio: R$ ${currentConsultation.price.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}\n🔢 Código: ${currentConsultation.code}\n📊 Referência: ${currentConsultation.reference}\n⏰ Data: ${currentConsultation.date}\n\n🎮 Compartilhado via FIPE Gamer Edition`;
             const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
             window.open(url, '_blank');
         }
@@ -1650,8 +2274,8 @@
         function shareViaTwitter() {
             if (!currentConsultation) return;
             
-            const text = `Consulta Tabela FIPE: ${currentConsultation.brand} ${currentConsultation.model} ${currentConsultation.year} - R$ ${currentConsultation.price.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(currentConsultation.shareUrl)}`;
+            const text = `🎮 FIPE Gamer: ${currentConsultation.brand} ${currentConsultation.model} ${currentConsultation.year} - R$ ${currentConsultation.price.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(currentConsultation.shareUrl)}&hashtags=FIPEGamer,Games,Consoles`;
             window.open(url, '_blank', 'width=600,height=400');
         }
 
@@ -1659,8 +2283,8 @@
         function shareViaEmail() {
             if (!currentConsultation) return;
             
-            const subject = `Consulta Tabela FIPE - ${currentConsultation.brand} ${currentConsultation.model}`;
-            const body = `Prezado(a),\n\nSegue abaixo o resultado da consulta à Tabela FIPE:\n\nVeículo: ${currentConsultation.brand} ${currentConsultation.model}\nAno Modelo: ${currentConsultation.year}\nPreço Médio: R$ ${currentConsultation.price.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}\nCódigo FIPE: ${currentConsultation.code}\nMês de Referência: ${currentConsultation.reference}\nData da Consulta: ${currentConsultation.date}\n\nEste é um documento de referência para negociação.\n\nAtenciosamente,\nFIPE - Fundação Instituto de Pesquisas Econômicas`;
+            const subject = `🎮 Consulta FIPE Gamer - ${currentConsultation.brand} ${currentConsultation.model}`;
+            const body = `🎮 CONSULTA FIPE GAMER 🎮\n\nPrezado(a) gamer,\n\nSegue abaixo o resultado da consulta à Tabela FIPE Gamer:\n\n📱 PLATAFORMA: ${currentConsultation.brand}\n🎯 MODELO/JOGO: ${currentConsultation.model}\n📅 ANO DE LANÇAMENTO: ${currentConsultation.year}\n💰 PREÇO MÉDIO: R$ ${currentConsultation.price.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}\n🔢 CÓDIGO FIPE: ${currentConsultation.code}\n📊 MÊS DE REFERÊNCIA: ${currentConsultation.reference}\n⏰ DATA DA CONSULTA: ${currentConsultation.date}\n\n🎮 Este é um documento de referência para negociação de produtos gamers.\n\nAtenciosamente,\nFIPE - Edição Gamer`;
             const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             
             window.location.href = mailtoLink;
@@ -1669,12 +2293,48 @@
         // Imprimir consulta
         function printConsultation() {
             if (!currentConsultation) {
-                alert('Realize uma consulta primeiro para imprimir.');
+                alert('🎮 Realize uma consulta primeiro para imprimir.');
                 return;
             }
             
             window.print();
         }
+        
+        // Efeitos especiais aleatórios
+        function addRandomEffects() {
+            // Adicionar efeitos de glitch aleatórios em títulos
+            const titles = document.querySelectorAll('h1, h2, h3');
+            titles.forEach(title => {
+                if (Math.random() > 0.7) {
+                    title.classList.add('glitch');
+                    title.setAttribute('data-text', title.textContent);
+                }
+            });
+            
+            // Efeito de partículas (simulado com pseudo-elementos)
+            setInterval(() => {
+                const particles = document.createElement('div');
+                particles.style.position = 'fixed';
+                particles.style.top = Math.random() * 100 + 'vh';
+                particles.style.left = Math.random() * 100 + 'vw';
+                particles.style.width = '2px';
+                particles.style.height = '2px';
+                particles.style.background = Math.random() > 0.5 ? '#00ffea' : '#ff0080';
+                particles.style.borderRadius = '50%';
+                particles.style.boxShadow = '0 0 5px currentColor';
+                particles.style.zIndex = '0';
+                particles.style.pointerEvents = 'none';
+                particles.style.animation = 'float 3s ease-in-out forwards';
+                document.body.appendChild(particles);
+                
+                setTimeout(() => {
+                    particles.remove();
+                }, 3000);
+            }, 500);
+        }
+        
+        // Iniciar efeitos
+        setTimeout(addRandomEffects, 1000);
     </script>
 </body>
 </html>
