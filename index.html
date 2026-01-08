@@ -849,6 +849,36 @@
         .print-only {
             display: none;
         }
+        
+        /* Exemplo pré-carregado */
+        .example-consultation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #0056a6;
+        }
+        
+        .example-consultation p {
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #495057;
+        }
+        
+        .example-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #6c757d;
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .example-btn:hover {
+            background-color: #5a6268;
+        }
     </style>
 </head>
 <body>
@@ -927,6 +957,14 @@
                     
                     <div class="alternative-link">
                         <a href="#" id="toggle-code-search"><i class="fas fa-key"></i> Consultar por Código FIPE</a>
+                    </div>
+                    
+                    <!-- Exemplo pré-carregado -->
+                    <div class="example-consultation">
+                        <p><strong>Exemplo rápido:</strong> Teste o sistema com um exemplo pré-configurado</p>
+                        <button class="example-btn" id="load-example">
+                            <i class="fas fa-bolt"></i> Carregar exemplo (Fiat Argo 2024)
+                        </button>
                     </div>
                     
                     <!-- Formulário alternativo para código FIPE -->
@@ -1192,42 +1230,42 @@
             fiat: {
                 modelos: ["Argo Drive 1.0", "Mobi Like 1.0", "Cronos Drive 1.3", "Strada Volcye 1.3", "Toro Freedom 1.8"],
                 anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 65000
+                precoBase: 72990
             },
             volkswagen: {
                 modelos: ["Polo 1.0 MSI", "Virtus 1.0 TSI", "T-Cross 1.0 TSI", "Gol 1.0 MSI", "Nivus 1.0 TSI"],
                 anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 75000
+                precoBase: 89990
             },
             chevrolet: {
                 modelos: ["Onix 1.0 MT", "Onix Plus 1.0 Turbo", "Tracker 1.2 Turbo", "Spin 1.8", "Cruze 1.4 Turbo"],
                 anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 70000
+                precoBase: 78990
             },
             ford: {
                 modelos: ["Ka 1.0 SE", "EcoSport 1.5 SE", "Ranger 2.2 XL", "Territory 1.5 Turbo", "Mustang 5.0 V8"],
                 anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 68000
+                precoBase: 69990
             },
             hyundai: {
                 modelos: ["HB20 1.0 Comfort", "Creta 1.6 Comfort", "Tucson 2.0 GL", "HB20S 1.0 Turbo", "Santa Fe 3.5 V6"],
                 anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 72000
+                precoBase: 76990
             },
             toyota: {
                 modelos: ["Corolla 2.0 XEi", "Hilux 2.8 SRX", "SW4 4x4 Diesel", "Yaris 1.5 XS", "RAV4 2.5 Hybrid"],
                 anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 95000
+                precoBase: 149990
             },
             honda: {
                 modelos: ["Civic 2.0 Touring", "HR-V 1.5 Turbo", "WR-V 1.5 Flex", "City 1.5 LX", "Accord 2.0 Turbo"],
                 anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 85000
+                precoBase: 169990
             },
             renault: {
                 modelos: ["Kwid 1.0 Life", "Duster 1.6 Zen", "Captur 1.6 Intense", "Sandero 1.0 Life", "Logan 1.0 Life"],
                 anos: ["2024", "2023", "2022", "2021", "2020"],
-                precoBase: 60000
+                precoBase: 61990
             },
             jeep: {
                 modelos: ["Renegade 1.8 Sport", "Compass 2.0 Limited", "Wrangler 3.6 Rubicon", "Grand Cherokee 3.6"],
@@ -1248,7 +1286,6 @@
             
             const currentMonth = monthNames[currentDate.getMonth()];
             const currentYear = currentDate.getFullYear();
-            const formattedDate = `${currentDate.getDate().toString().padStart(2, '0')}/${(currentDate.getMonth()+1).toString().padStart(2, '0')}/${currentYear}`;
             
             // Atualizar referências de data
             document.querySelector('.current-month').textContent = `Referência: ${currentMonth}/${currentYear}`;
@@ -1303,20 +1340,53 @@
                 const priceMultiplier = 1 - (yearDiff * 0.1);
                 const adjustedPrice = Math.round(basePrice * priceMultiplier / 1000) * 1000;
                 
+                // CHAMADA CORRIGIDA: Passar o preço ajustado, não o basePrice
                 showResult(brandName, modelName, codeYear, adjustedPrice, fipeCode);
-                
-                // Armazenar dados da consulta
-                currentConsultation = {
-                    brand: brandName,
-                    model: modelName,
-                    year: codeYear,
-                    price: adjustedPrice,
-                    code: fipeCode,
-                    type: 'Carro',
-                    date: formattedDate,
-                    reference: `${currentMonth}/${currentYear}`
-                };
             });
+            
+            // Configurar exemplo pré-carregado
+            document.getElementById('load-example').addEventListener('click', function() {
+                // Preencher formulário com exemplo
+                document.getElementById('car-brand').value = 'fiat';
+                
+                // Habilitar e preencher modelo
+                document.getElementById('car-model').disabled = false;
+                const modelSelect = document.getElementById('car-model');
+                modelSelect.innerHTML = '<option value="">Selecione o modelo</option>';
+                vehicleData.fiat.modelos.forEach(modelo => {
+                    const option = document.createElement('option');
+                    option.value = modelo.toLowerCase().replace(/\s+/g, '-');
+                    option.textContent = modelo;
+                    modelSelect.appendChild(option);
+                });
+                modelSelect.value = 'argo-drive-1.0';
+                
+                // Habilitar e preencher ano
+                document.getElementById('car-year').disabled = false;
+                const yearSelect = document.getElementById('car-year');
+                yearSelect.innerHTML = '<option value="">Selecione o ano</option>';
+                vehicleData.fiat.anos.forEach(ano => {
+                    const option = document.createElement('option');
+                    option.value = ano;
+                    option.textContent = ano;
+                    yearSelect.appendChild(option);
+                });
+                yearSelect.value = '2024';
+                
+                // Executar consulta automaticamente
+                const brand = 'Fiat';
+                const model = 'Argo Drive 1.0';
+                const year = '2024';
+                const basePrice = vehicleData.fiat.precoBase;
+                const fipeCode = generateFipeCode('fiat', year);
+                
+                showResult(brand, model, year, basePrice, fipeCode);
+            });
+            
+            // Carregar um exemplo inicial automaticamente para testes
+            setTimeout(() => {
+                //document.getElementById('load-example').click();
+            }, 500);
         });
 
         // Configurar eventos dos formulários
@@ -1356,29 +1426,16 @@
                     const year = carYear.value;
                     const basePrice = vehicleData[carBrand.value].precoBase;
                     
+                    // Calcular preço ajustado
+                    const yearDiff = 2024 - parseInt(year);
+                    const priceMultiplier = 1 - (yearDiff * 0.1);
+                    const adjustedPrice = Math.round(basePrice * priceMultiplier / 1000) * 1000;
+                    
                     // Gerar código FIPE aleatório
                     const fipeCode = generateFipeCode(carBrand.value, year);
                     
-                    showResult(brand, model, year, basePrice, fipeCode);
-                    
-                    // Armazenar dados da consulta
-                    const currentDate = new Date();
-                    const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
-                                       "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-                    const currentMonth = monthNames[currentDate.getMonth()];
-                    const currentYear = currentDate.getFullYear();
-                    const formattedDate = `${currentDate.getDate().toString().padStart(2, '0')}/${(currentDate.getMonth()+1).toString().padStart(2, '0')}/${currentYear} ${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}`;
-                    
-                    currentConsultation = {
-                        brand: brand,
-                        model: model,
-                        year: year,
-                        price: basePrice,
-                        code: fipeCode,
-                        type: 'Carro',
-                        date: formattedDate,
-                        reference: `${currentMonth}/${currentYear}`
-                    };
+                    // CHAMADA CORRIGIDA: Passar o preço ajustado
+                    showResult(brand, model, year, adjustedPrice, fipeCode);
                 } else {
                     alert('Por favor, selecione a marca, modelo e ano do veículo.');
                 }
@@ -1430,34 +1487,53 @@
             return `${brandCode}${randomNum}-${version}`;
         }
 
-        // Mostrar resultado da consulta
-        function showResult(brand, model, year, basePrice, fipeCode) {
+        // Mostrar resultado da consulta - FUNÇÃO PRINCIPAL CORRIGIDA
+        function showResult(brand, model, year, price, fipeCode) {
             const currentDate = new Date();
+            const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
+                               "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+            const currentMonth = monthNames[currentDate.getMonth()];
+            const currentYear = currentDate.getFullYear();
             const formattedDate = `${currentDate.getDate().toString().padStart(2, '0')}/${(currentDate.getMonth()+1).toString().padStart(2, '0')}/${currentDate.getFullYear()} ${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}`;
             
-            // Calcular preço ajustado
-            const yearDiff = 2024 - parseInt(year);
-            const priceMultiplier = 1 - (yearDiff * 0.1);
-            const adjustedPrice = Math.round(basePrice * priceMultiplier / 1000) * 1000;
+            // Garantir que price é um número
+            const numericPrice = typeof price === 'number' ? price : parseFloat(price) || 0;
             
             // Atualizar elementos do resultado
             document.getElementById('result-brand').textContent = brand;
             document.getElementById('result-model').textContent = model;
             document.getElementById('result-year').textContent = year;
             document.getElementById('result-code').textContent = fipeCode;
-            document.getElementById('result-price').textContent = `R$ ${adjustedPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('result-price').textContent = `R$ ${numericPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             document.getElementById('result-period').textContent = `Data da consulta: ${formattedDate}`;
+            document.getElementById('result-month').textContent = `${currentMonth}/${currentYear}`;
             
             // Atualizar elementos de impressão
             document.getElementById('print-brand').textContent = brand;
             document.getElementById('print-model').textContent = model;
             document.getElementById('print-year').textContent = year;
             document.getElementById('print-code').textContent = fipeCode;
-            document.getElementById('print-price').textContent = `R$ ${adjustedPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('print-price').textContent = `R$ ${numericPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             document.getElementById('print-date').textContent = formattedDate;
-            document.getElementById('print-ref-month').textContent = `Junho/${currentDate.getFullYear()}`;
-            document.getElementById('print-ref-month2').textContent = `Junho/${currentDate.getFullYear()}`;
+            document.getElementById('print-ref-month').textContent = `${currentMonth}/${currentYear}`;
+            document.getElementById('print-ref-month2').textContent = `${currentMonth}/${currentYear}`;
             document.getElementById('print-auth').textContent = 'CONSULTA VÁLIDA - DOCUMENTO OFICIAL';
+            
+            // Armazenar dados da consulta atual - CORREÇÃO AQUI
+            currentConsultation = {
+                brand: brand,
+                model: model,
+                year: year,
+                price: numericPrice,
+                code: fipeCode,
+                type: 'Carro',
+                date: formattedDate,
+                reference: `${currentMonth}/${currentYear}`,
+                shareText: `Consulta Tabela FIPE: ${brand} ${model} ${year} - Preço: R$ ${numericPrice.toLocaleString('pt-BR')} - Código: ${fipeCode}`
+            };
+            
+            // Atualizar URL de compartilhamento
+            updateShareUrl();
             
             // Mostrar seção de resultado
             const resultSection = document.getElementById('result-section');
@@ -1465,9 +1541,6 @@
             
             // Scroll para o resultado
             resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            
-            // Atualizar URL de compartilhamento
-            updateShareUrl(brand, model, year, adjustedPrice, fipeCode);
         }
 
         // Configurar modal de compartilhamento
@@ -1539,21 +1612,28 @@
         }
 
         // Atualizar URL de compartilhamento
-        function updateShareUrl(brand, model, year, price, code) {
-            const baseUrl = window.location.href.split('?')[0];
-            const shareText = `Consulta FIPE: ${brand} ${model} ${year} - Preço: R$ ${price.toLocaleString('pt-BR')} - Código: ${code}`;
-            const shareUrl = `${baseUrl}?consulta=${encodeURIComponent(JSON.stringify({brand, model, year, price, code}))}`;
+        function updateShareUrl() {
+            if (!currentConsultation) return;
+            
+            const baseUrl = window.location.origin + window.location.pathname;
+            const shareText = currentConsultation.shareText;
+            const shareUrl = `${baseUrl}?consulta=${encodeURIComponent(JSON.stringify({
+                brand: currentConsultation.brand,
+                model: currentConsultation.model, 
+                year: currentConsultation.year,
+                price: currentConsultation.price,
+                code: currentConsultation.code
+            }))}`;
             
             document.getElementById('share-url').value = shareUrl;
             currentConsultation.shareUrl = shareUrl;
-            currentConsultation.shareText = shareText;
         }
 
         // Compartilhar via WhatsApp
         function shareViaWhatsApp() {
             if (!currentConsultation) return;
             
-            const text = `Consulta Tabela FIPE\n\nVeículo: ${currentConsultation.brand} ${currentConsultation.model} ${currentConsultation.year}\nPreço Médio: R$ ${currentConsultation.price.toLocaleString('pt-BR')}\nCódigo FIPE: ${currentConsultation.code}\nMês de Referência: ${currentConsultation.reference}\n\nCompartilhado via Tabela FIPE`;
+            const text = `Consulta Tabela FIPE\n\nVeículo: ${currentConsultation.brand} ${currentConsultation.model} ${currentConsultation.year}\nPreço Médio: R$ ${currentConsultation.price.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}\nCódigo FIPE: ${currentConsultation.code}\nMês de Referência: ${currentConsultation.reference}\nData da Consulta: ${currentConsultation.date}\n\nCompartilhado via Tabela FIPE`;
             const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
             window.open(url, '_blank');
         }
@@ -1570,7 +1650,7 @@
         function shareViaTwitter() {
             if (!currentConsultation) return;
             
-            const text = `Consulta Tabela FIPE: ${currentConsultation.brand} ${currentConsultation.model} ${currentConsultation.year} - R$ ${currentConsultation.price.toLocaleString('pt-BR')}`;
+            const text = `Consulta Tabela FIPE: ${currentConsultation.brand} ${currentConsultation.model} ${currentConsultation.year} - R$ ${currentConsultation.price.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(currentConsultation.shareUrl)}`;
             window.open(url, '_blank', 'width=600,height=400');
         }
